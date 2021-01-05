@@ -1,11 +1,14 @@
 import React from "react";
+import { Header } from "../Componets";
+import styled from "styled-components";
 
 const Home: React.FC = () => {
   return (
-    <div>
-      <h1>ねこ</h1>
-      <h2>ねこ</h2>
-    </div>
+    <StyledSection>
+      <Header />
+    </StyledSection>
   );
 };
 export default Home;
+
+const StyledSection = styled.section``;
