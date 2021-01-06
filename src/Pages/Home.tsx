@@ -1,11 +1,16 @@
 import React from "react";
+import { PopularRecipe } from "../Componets";
+import styled from "styled-components";
 
 const Home: React.FC = () => {
   return (
-    <div>
-      <h1>ねこ</h1>
-      <h2>ねこ</h2>
-    </div>
+    <StyledSection>
+      <PopularRecipe />
+    </StyledSection>
   );
 };
 export default Home;
+
+const StyledSection = styled.section`
+  margin: 0 auto;
+`;
