@@ -1,14 +1,16 @@
 import React from "react";
-import { Header } from "../Componets";
+import { PopularRecipe } from "../Componets";
 import styled from "styled-components";
 
 const Home: React.FC = () => {
   return (
     <StyledSection>
-      <Header />
+      <PopularRecipe />
     </StyledSection>
   );
 };
 export default Home;
 
-const StyledSection = styled.section``;
+const StyledSection = styled.section`
+  margin: 0 auto;
+`;

@@ -1,15 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import HeaderIcons from "./HeaderIcons";
+import { useHistory } from "react-router-dom";
 
 const Header: React.FC = () => {
+  const history = useHistory();
+
   return (
     <StyledHeader>
       <HeaderIcons isReverce={false} />
-      <StyledHeaderTitle>Water Only Cokking</StyledHeaderTitle>
+      <StyledHeaderTitle onClick={() => history.push("/")}>
+        Water Only Cokking
+      </StyledHeaderTitle>
       <StyledHeaderNav>
-        <li>新規登録</li>
-        <li>ログイン</li>
+        <li onClick={() => history.push("/signin")}>新規登録</li>
+        <li onClick={() => history.push("/login")}>ログイン</li>
       </StyledHeaderNav>
       <HeaderIcons isReverce={true} />
     </StyledHeader>
@@ -23,8 +28,6 @@ const StyledHeader = styled.header`
   top: 0;
   width: 100%;
   height: 80px;
-  background-color: hsl(185deg 100% 86%);
-  box-shadow: 0px 5px 9px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +38,7 @@ const StyledHeaderTitle = styled.h1`
   font-family: "Amatic SC", cursive;
   color: black;
   margin-left: 16px;
-  font-size: 40px;
+  font-size: 45px;
   color: #333;
   cursor: pointer;
 `;
@@ -51,5 +54,8 @@ const StyledHeaderNav = styled.ul`
     text-decoration: none;
     margin: 0 16px;
     cursor: pointer;
+    :hover {
+      color: aqua;
+    }
   }
 `;

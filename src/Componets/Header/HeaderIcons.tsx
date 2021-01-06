@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
-import flypan from "../assets/Images/flypan.svg";
-import nabe from "../assets/Images/nabe.svg";
-import nife from "../assets/Images/nife.svg";
-import water from "../assets/Images/water.svg";
+import flypan from "../../assets/Images/flypan.svg";
+import nabe from "../../assets/Images/nabe.svg";
+import nife from "../../assets/Images/nife.svg";
+import water from "../../assets/Images/water.svg";
 import styled from "styled-components";
 
 type Props = {
