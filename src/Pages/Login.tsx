@@ -4,7 +4,7 @@ import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useStringChange from "../hooks/useStringChange";
-import { login } from "../reducks/Users/oparations";
+import { login, googleLogin, twitterLogin } from "../reducks/Users/oparations";
 
 const Login: React.FC = () => {
   const history = useHistory();
@@ -53,14 +53,14 @@ const Login: React.FC = () => {
         ログインする
       </StyledLoginButton>
       <StyledSnsLogin>
-        <button>
+        <button onClick={() => dispatch(googleLogin())}>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"
             alt="google icon"
           />
           Google with Login
         </button>
-        <button>
+        <button onClick={() => dispatch(twitterLogin())}>
           <img
             src="https://upload.wikimedia.org/wikipedia/fr/c/c8/Twitter_Bird.svg"
             alt="twitter cion"

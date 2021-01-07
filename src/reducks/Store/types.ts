@@ -8,7 +8,7 @@ export type StoreState = {
     username: string;
     icon: string;
   };
-  roter: RouterState;
+  router: RouterState;
 };
 
 declare module "react-redux" {

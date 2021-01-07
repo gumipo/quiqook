@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import HeaderIcons from "./HeaderIcons";
 import { useHistory } from "react-router-dom";
@@ -9,7 +9,7 @@ import {
   getIsSignedIn,
   getUserName,
 } from "../../reducks/Users/selector";
-import { signOut } from "../../reducks/Users/oparations";
+import { listenAuthState, signOut } from "../../reducks/Users/oparations";
 import chef from "../../assets/Images/chef.png";
 
 const Header: React.FC = () => {
@@ -19,6 +19,10 @@ const Header: React.FC = () => {
   const icon = getUserIcon(selector);
   const isSignedIn = getIsSignedIn(selector);
   const username = getUserName(selector);
+
+  useEffect(() => {
+    dispatch(listenAuthState());
+  }, []);
 
   return (
     <StyledHeader>
@@ -69,6 +73,7 @@ const StyledHeaderTitle = styled.h1`
 const UserIcon = styled.img`
   width: 42px;
   height: 42px;
+  border-radius: 21px;
 `;
 
 const UserName = styled.p`

@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import Auth from "./Auth";
 import {
   Home,
   SiteDescription,
@@ -7,6 +8,8 @@ import {
   Login,
   SignUP,
   ResetPassword,
+  UserRecipe,
+  AllRecipes,
 } from "./Pages";
 
 const Router: React.FC = () => {
@@ -17,7 +20,11 @@ const Router: React.FC = () => {
       <Route exact path="/signup" component={SignUP} />
       <Route exact path="/reset/password" component={ResetPassword} />
       <Route exact path="/site/description" component={SiteDescription} />
-      <Route exact path="/create/recipe" component={CreateRecipe} />
+      <Route exact path="/all/recipe" component={AllRecipes} />
+      <Auth>
+        <Route exact path="/my/recipe" component={UserRecipe} />
+        <Route exact path="/create/recipe" component={CreateRecipe} />
+      </Auth>
     </Switch>
   );
 };

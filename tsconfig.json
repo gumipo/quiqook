@@ -12,6 +12,7 @@
     "strictNullChecks": true,
     "allowJs": true,
     "skipLibCheck": true,
+    "noStrictGenericChecks": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,

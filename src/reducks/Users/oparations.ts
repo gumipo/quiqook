@@ -1,10 +1,18 @@
 import { signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
-import { auth, db, FirebaseTimeStamp } from "../../Firebase/index";
+import {
+  auth,
+  db,
+  FirebaseTimeStamp,
+  googleProvider,
+  twitterProvider,
+} from "../../Firebase/index";
 import { Dispatch } from "redux";
+import { StoreState } from "./../Store/types";
 
 export const listenAuthState = () => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch, getState: () => StoreState) => {
+    const path = getState().router.location.pathname;
     return auth.onAuthStateChanged((user) => {
       if (user) {
         const uid = user.uid;
@@ -25,8 +33,14 @@ export const listenAuthState = () => {
               })
             );
           });
+      } else if (
+        path === "/" ||
+        path === "/all/recipe" ||
+        path === "/site/description"
+      ) {
+        dispatch(push(path));
       } else {
-        dispatch(push("/"));
+        dispatch(push("/login"));
       }
     });
   };
@@ -52,7 +66,7 @@ export const signUp = (username: string, email: string, password: string) => {
             .doc(uid)
             .set(userInitialData)
             .then(() => {
-              dispatch(push("/"));
+              dispatch(push("/my/recipe"));
             });
         }
       });
@@ -81,7 +95,7 @@ export const login = (email: string, password: string) => {
                 icon: data.icon,
               })
             );
-            dispatch(push("/"));
+            dispatch(push("/my/recipe"));
           });
       }
     });
@@ -109,6 +123,77 @@ export const resetPassword = (email: string) => {
       })
       .catch(() => {
         alert("パスワードリセットに失敗しました。再度お試しください");
+      });
+  };
+};
+
+export const googleLogin = () => {
+  return (dispatch: Dispatch) => {
+    auth
+      .signInWithPopup(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        if (user === null) {
+          return null;
+        }
+        const uid = user.uid;
+        const timestamp = FirebaseTimeStamp.now();
+        const userData = {
+          createed_at: timestamp,
+          updated_at: timestamp,
+          uid: user.uid,
+          email: user.email,
+          username: user.displayName,
+          icon: user.photoURL,
+        };
+        db.collection("users")
+          .doc(uid)
+          .set(userData)
+          .then(() => {
+            dispatch(push("/my/recipe"));
+          });
+      })
+      .catch(() => {
+        alert(
+          "ログインに失敗しました。メールアドレスまたは他のSNSアカウントをお確かめください"
+        );
+      });
+  };
+};
+
+export const twitterLogin = () => {
+  return (dispatch: Dispatch) => {
+    auth
+      .signInWithPopup(twitterProvider)
+      .then((result) => {
+        const user = result.user;
+        if (user === null) {
+          return null;
+        }
+        const uid = user.uid;
+        const timestamp = FirebaseTimeStamp.now();
+        const userData = {
+          createed_at: timestamp,
+          updated_at: timestamp,
+          uid: user.uid,
+          email: user.email,
+          username: user.displayName,
+          icon: user.photoURL,
+        };
+        db.collection("users")
+          .doc(uid)
+          .set(userData)
+          .then(() => {
+            dispatch(push("/my/recipe"));
+          })
+          .catch(() => {
+            alert("ログインに失敗しました。");
+          });
+      })
+      .catch(() => {
+        alert(
+          "ログインに失敗しました。メールアドレスまたは他のSNSアカウントをお確かめください"
+        );
       });
   };
 };
