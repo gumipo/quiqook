@@ -13,7 +13,7 @@ const Header: React.FC = () => {
         Water Only Cokking
       </StyledHeaderTitle>
       <StyledHeaderNav>
-        <li onClick={() => history.push("/signin")}>新規登録</li>
+        <li onClick={() => history.push("/signup")}>新規登録</li>
         <li onClick={() => history.push("/login")}>ログイン</li>
       </StyledHeaderNav>
       <HeaderIcons isReverce={true} />

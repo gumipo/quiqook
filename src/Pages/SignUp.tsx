@@ -2,24 +2,35 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import useStringChange from "../hooks/useStringChange";
 
-const Login: React.FC = () => {
+const SignUp: React.FC = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [err, setErr] = useState(false);
 
-  const userLogin = (email: string, password: string) => {
-    if (email.length === 0 || password.length === 0) {
+  const userSignUp = (
+    email: string,
+    password: string,
+    confirmPassword: string
+  ) => {
+    if (
+      email.length === 0 ||
+      password.length === 0 ||
+      confirmPassword.length === 0
+    ) {
       setErr(true);
       return;
     }
   };
 
   return (
-    <StyledLogin>
-      <StyledLoginTitle>ログイン</StyledLoginTitle>
+    <StyledSignUp>
+      <StyledSignUpTitle>新規登録</StyledSignUpTitle>
       <Divider />
       {err && (
         <StyledErrText>
@@ -44,54 +55,44 @@ const Login: React.FC = () => {
             onChange={useStringChange(setPassword)}
           />
         </StyledInputArea>
+        <StyledInputArea>
+          <span>確認パスワード</span>
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={useStringChange(setConfirmPassword)}
+          />
+        </StyledInputArea>
       </StyledUserInputArea>
-      <StyledLoginButton onClick={() => userLogin(email, password)}>
-        ログインする
-      </StyledLoginButton>
-      <StyledSnsLogin>
-        <button>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Chrome_icon_%28September_2014%29.svg"
-            alt="google icon"
-          />
-          Google with Login
-        </button>
-        <button>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/fr/c/c8/Twitter_Bird.svg"
-            alt="twitter cion"
-          />
-          Twitter with Login
-        </button>
-      </StyledSnsLogin>
+      <StyledSignUpButton
+        onClick={() => userSignUp(email, password, confirmPassword)}
+      >
+        登録する
+      </StyledSignUpButton>
       <StyledText>
-        アカウント登録がまだの方は
-        <span onClick={() => history.push("/signup")}>こちら</span>
+        アカウントをお持ちの方は
+        <span onClick={() => history.push("/login")}>こちら</span>
       </StyledText>
-      <StyledText>
-        パスワードをお忘れの方は
-        <span onClick={() => history.push("/reset/password")}>こちら</span>
-      </StyledText>
-    </StyledLogin>
+    </StyledSignUp>
   );
 };
 
-export default Login;
+export default SignUp;
 
-const StyledLogin = styled.section`
+const StyledSignUp = styled.section`
   width: 800px;
   margin: 0 auto;
   text-align: center;
 `;
 
-const StyledLoginTitle = styled.h1`
-  text-align: left;
-  margin: 16px 0 0 8px;
-`;
-
 const StyledErrText = styled.p`
   color: red;
   font-size: 16px;
+`;
+
+const StyledSignUpTitle = styled.h1`
+  text-align: left;
+  margin: 16px 0 0 8px;
 `;
 
 const StyledUserInputArea = styled.div`
@@ -105,7 +106,6 @@ const StyledInputArea = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 16px;
-
   span {
     margin-left: 16px;
   }
@@ -117,7 +117,7 @@ const StyledInputArea = styled.div`
   }
 `;
 
-const StyledLoginButton = styled.button`
+const StyledSignUpButton = styled.button`
   font-size: 16px;
   width: 200px;
   margin: 24px auto;
@@ -129,38 +129,6 @@ const StyledLoginButton = styled.button`
   cursor: pointer;
   :hover {
     opacity: 0.7;
-  }
-`;
-
-const StyledSnsLogin = styled.div`
-  width: 600px;
-  margin: 16px auto;
-  display: flex;
-  align-items: center;
-  button {
-    outline: none;
-    width: 300px;
-    height: 50px;
-    margin: 0 15px;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    :hover {
-      opacity: 0.7;
-    }
-    :nth-child(1) {
-      background-color: #fff;
-    }
-    :nth-child(2) {
-      background-color: #00acee;
-      color: white;
-    }
-  }
-  img {
-    width: 30px;
-    height: 30px;
-    background-color: white;
-    margin-right: 16px;
   }
 `;
 
