@@ -9,6 +9,13 @@ const ResetPassword: React.FC = () => {
   const [email, setEmail] = useState("");
   const [err, setErr] = useState(false);
 
+  const userResetPasword = (email: string) => {
+    if (email.length === 0) {
+      setErr(true);
+      return;
+    }
+  };
+
   return (
     <StyledResetPassword>
       <StyledResetTitle>パスワードのリセット</StyledResetTitle>
@@ -29,7 +36,9 @@ const ResetPassword: React.FC = () => {
           />
         </StyledInputArea>
       </StyledUserInputArea>
-      <StyledResetButton>パスワードリセット</StyledResetButton>
+      <StyledResetButton onClick={() => userResetPasword(email)}>
+        パスワードリセット
+      </StyledResetButton>
       <StyledText>
         新規登録の方は
         <span onClick={() => history.push("/signup")}>こちら</span>
@@ -92,9 +101,6 @@ const StyledResetButton = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
-  :hover {
-    opacity: 0.7;
-  }
 `;
 
 const StyledText = styled.p`

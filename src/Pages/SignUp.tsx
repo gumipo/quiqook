@@ -4,21 +4,26 @@ import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useStringChange from "../hooks/useStringChange";
+import { signUp } from "../reducks/Users/oparations";
 
 const SignUp: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [err, setErr] = useState(false);
+  const [passwordMatchErr, setpasswordMatchErr] = useState(false);
 
   const userSignUp = (
+    name: string,
     email: string,
     password: string,
     confirmPassword: string
   ) => {
     if (
+      name.length === 0 ||
       email.length === 0 ||
       password.length === 0 ||
       confirmPassword.length === 0
@@ -26,6 +31,10 @@ const SignUp: React.FC = () => {
       setErr(true);
       return;
     }
+    if (password !== confirmPassword) {
+      setpasswordMatchErr(true);
+    }
+    dispatch(signUp(name, email, password));
   };
 
   return (
@@ -37,7 +46,23 @@ const SignUp: React.FC = () => {
           必須項目を入力の上もう一度お確かめください
         </StyledErrText>
       )}
+      {passwordMatchErr && (
+        <StyledErrText>
+          パスワードが一致していません。
+          <br />
+          もう一度お確かめください
+        </StyledErrText>
+      )}
       <StyledUserInputArea>
+        <StyledInputArea>
+          <span>ニックネーム</span>
+          <input
+            type="text"
+            placeholder="お名前"
+            value={name}
+            onChange={useStringChange(setName)}
+          />
+        </StyledInputArea>
         <StyledInputArea>
           <span>メールアドレス</span>
           <input
@@ -65,7 +90,7 @@ const SignUp: React.FC = () => {
         </StyledInputArea>
       </StyledUserInputArea>
       <StyledSignUpButton
-        onClick={() => userSignUp(email, password, confirmPassword)}
+        onClick={() => userSignUp(name, email, password, confirmPassword)}
       >
         登録する
       </StyledSignUpButton>
@@ -127,9 +152,6 @@ const StyledSignUpButton = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
-  :hover {
-    opacity: 0.7;
-  }
 `;
 
 const StyledText = styled.p`

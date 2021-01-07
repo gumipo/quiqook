@@ -127,9 +127,6 @@ const StyledLoginButton = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
-  :hover {
-    opacity: 0.7;
-  }
 `;
 
 const StyledSnsLogin = styled.div`
@@ -145,9 +142,6 @@ const StyledSnsLogin = styled.div`
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
-    :hover {
-      opacity: 0.7;
-    }
     :nth-child(1) {
       background-color: #fff;
     }
