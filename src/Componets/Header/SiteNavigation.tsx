@@ -5,11 +5,18 @@ import EventNoteIcon from "@material-ui/icons/EventNote";
 import CreateIcon from "@material-ui/icons/Create";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import RestaurantIcon from "@material-ui/icons/Restaurant";
+import HomeIcon from "@material-ui/icons/Home";
 
 const SiteNavigation: React.FC = () => {
   const history = useHistory();
 
   const navMenus = [
+    {
+      id: "home",
+      icon: HomeIcon,
+      label: "ホーム",
+      value: "/",
+    },
     {
       id: "allRecipe",
       icon: RestaurantIcon,
@@ -42,7 +49,7 @@ const SiteNavigation: React.FC = () => {
         {navMenus.map((menu) => (
           <li key={menu.id} onClick={() => history.push(menu.value)}>
             <menu.icon />
-            {menu.label}
+            <span>{menu.label}</span>
           </li>
         ))}
       </StyledMenuList>
@@ -66,7 +73,12 @@ const StyledMenuList = styled.ul`
   align-items: center;
   justify-content: space-around;
   li {
+    display: flex;
+    align-items: center;
     padding: 0 16px;
+    span {
+      margin-left: 8px;
+    }
     :hover {
       background-color: #333;
       color: white;
