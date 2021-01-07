@@ -58,7 +58,7 @@ const SignUp: React.FC = () => {
           <span>ニックネーム</span>
           <input
             type="text"
-            placeholder="お名前"
+            placeholder="water taro"
             value={name}
             onChange={useStringChange(setName)}
           />

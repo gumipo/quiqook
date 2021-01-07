@@ -21,12 +21,12 @@ export const listenAuthState = () => {
                 isSignedIn: true,
                 uid: uid,
                 username: data.username,
-                icon: data.icon,
+                icon: data.icon ? data.icon : "",
               })
             );
           });
       } else {
-        dispatch(push("/signIn"));
+        dispatch(push("/"));
       }
     });
   };
@@ -59,6 +59,35 @@ export const signUp = (username: string, email: string, password: string) => {
   };
 };
 
+export const login = (email: string, password: string) => {
+  return async (dispatch: Dispatch) => {
+    auth.signInWithEmailAndPassword(email, password).then((result) => {
+      const user = result.user;
+      if (user) {
+        const uid = user.uid;
+        db.collection("users")
+          .doc(uid)
+          .get()
+          .then((snapshot) => {
+            const data = snapshot.data();
+            if (data === undefined) {
+              return null;
+            }
+            dispatch(
+              signInAction({
+                isSignedIn: true,
+                uid: uid,
+                username: data.username,
+                icon: data.icon,
+              })
+            );
+            dispatch(push("/"));
+          });
+      }
+    });
+  };
+};
+
 export const signOut = () => {
   return async (dispatch: Dispatch) => {
     auth.signOut().then(() => {
@@ -68,7 +97,7 @@ export const signOut = () => {
   };
 };
 
-export const ResetPassword = (email: string) => {
+export const resetPassword = (email: string) => {
   return async (dispatch: Dispatch) => {
     auth
       .sendPasswordResetEmail(email)
@@ -76,7 +105,7 @@ export const ResetPassword = (email: string) => {
         alert(
           "入力されたメールアドレスにパスワードリセット用のメールを送信しました"
         );
-        dispatch(push("/signIn"));
+        dispatch(push("/login"));
       })
       .catch(() => {
         alert("パスワードリセットに失敗しました。再度お試しください");

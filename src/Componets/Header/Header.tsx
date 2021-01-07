@@ -2,9 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import HeaderIcons from "./HeaderIcons";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {
+  getUserIcon,
+  getIsSignedIn,
+  getUserName,
+} from "../../reducks/Users/selector";
+import { signOut } from "../../reducks/Users/oparations";
+import chef from "../../assets/Images/chef.png";
 
 const Header: React.FC = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const icon = getUserIcon(selector);
+  const isSignedIn = getIsSignedIn(selector);
+  const username = getUserName(selector);
 
   return (
     <StyledHeader>
@@ -12,10 +26,19 @@ const Header: React.FC = () => {
       <StyledHeaderTitle onClick={() => history.push("/")}>
         Water Only Cokking
       </StyledHeaderTitle>
-      <StyledHeaderNav>
-        <li onClick={() => history.push("/signup")}>新規登録</li>
-        <li onClick={() => history.push("/login")}>ログイン</li>
-      </StyledHeaderNav>
+      {isSignedIn ? (
+        <StyledHeaderNav>
+          <UserIcon src={icon ? icon : chef} alt="usericon" />
+          <UserName>{username}chef</UserName>
+          <li onClick={() => dispatch(signOut())}>ログアウト</li>
+        </StyledHeaderNav>
+      ) : (
+        <StyledHeaderNav>
+          <li onClick={() => history.push("/signup")}>新規登録</li>
+          <li onClick={() => history.push("/login")}>ログイン</li>
+        </StyledHeaderNav>
+      )}
+
       <HeaderIcons isReverce={true} />
     </StyledHeader>
   );
@@ -41,6 +64,16 @@ const StyledHeaderTitle = styled.h1`
   font-size: 45px;
   color: #333;
   cursor: pointer;
+`;
+
+const UserIcon = styled.img`
+  width: 42px;
+  height: 42px;
+`;
+
+const UserName = styled.p`
+  width: 80px;
+  font-size: 12px;
 `;
 
 const StyledHeaderNav = styled.ul`

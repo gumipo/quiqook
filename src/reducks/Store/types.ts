@@ -4,7 +4,7 @@ import { RouterState } from "connected-react-router";
 export type StoreState = {
   users: {
     isSignedIn: false;
-    id: string;
+    uid: string;
     username: string;
     icon: string;
   };

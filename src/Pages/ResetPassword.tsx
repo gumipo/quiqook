@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import useStringChange from "../hooks/useStringChange";
+import { resetPassword } from "../reducks/Users/oparations";
 
 const ResetPassword: React.FC = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [err, setErr] = useState(false);
 
@@ -14,6 +17,7 @@ const ResetPassword: React.FC = () => {
       setErr(true);
       return;
     }
+    dispatch(resetPassword(email));
   };
 
   return (

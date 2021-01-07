@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import useStringChange from "../hooks/useStringChange";
+import { login } from "../reducks/Users/oparations";
 
 const Login: React.FC = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(false);
@@ -15,6 +18,7 @@ const Login: React.FC = () => {
       setErr(true);
       return;
     }
+    dispatch(login(email, password));
   };
 
   return (
