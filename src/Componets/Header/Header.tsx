@@ -32,7 +32,7 @@ const Header: React.FC = () => {
       </StyledHeaderTitle>
       {isSignedIn ? (
         <StyledHeaderNav>
-          <UserIcon src={icon ? icon : chef} alt="usericon" />
+          <UserIcon src={chef} alt="usericon" />
           <UserName>{username}chef</UserName>
           <li onClick={() => dispatch(signOut())}>ログアウト</li>
         </StyledHeaderNav>
@@ -51,8 +51,6 @@ const Header: React.FC = () => {
 export default Header;
 
 const StyledHeader = styled.header`
-  position: fixed;
-  top: 0;
   width: 100%;
   height: 80px;
   display: flex;

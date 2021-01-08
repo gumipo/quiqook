@@ -62,9 +62,8 @@ export default SiteNavigation;
 const StyledNavigation = styled.nav`
   width: 100%;
   height: 50px;
-  background-color: #06fcf19e;
+  background-color: #90fffa9e;
   box-shadow: 0px 0px 5px 0px #333;
-  margin-top: 80px;
   line-height: 50px;
 `;
 
@@ -72,6 +71,7 @@ const StyledMenuList = styled.ul`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin: 0;
   li {
     display: flex;
     align-items: center;
