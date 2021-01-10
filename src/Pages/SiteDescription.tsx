@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import water from "../assets/Images/water.jpg";
+import cook from "../assets/Images/cook.jpg";
 import cookMen from "../assets/Images/cook-men.png";
 import cookWomen from "../assets/Images/cook-women.png";
 import { useHistory } from "react-router-dom";
@@ -10,8 +10,8 @@ const SiteDescription: React.FC = () => {
   return (
     <StyledSiteDescription>
       <SectionTitle>
-        <img src={water} alt="water" />
-        <h1>Water Only Cokking</h1>
+        <img src={cook} alt="cook" />
+        <h1>QuiCook</h1>
       </SectionTitle>
       <StyledDescription>
         <FirstDescriptionText>
@@ -69,8 +69,9 @@ const SectionTitle = styled.div`
     height: 600px;
   }
   h1 {
-    width: 800px;
+    width: 700px;
     position: absolute;
+    color: white;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -100%);
@@ -80,7 +81,7 @@ const SectionTitle = styled.div`
     backdrop-filter: sepia(70%) contrast(230%) blur(5px);
     -webkit-backdrop-filter: sepia(70%) contrast(230%) blur(5px);
     ::after {
-      content: "〜水しか使えない料理レシピサイト〜";
+      content: "〜忙しい人の為のレシピサイト〜";
       font-size: 16px;
       padding-left: 12px;
     }

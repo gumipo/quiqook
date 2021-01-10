@@ -28,11 +28,11 @@ const Header: React.FC = () => {
     <StyledHeader>
       <HeaderIcons isReverce={false} />
       <StyledHeaderTitle onClick={() => history.push("/")}>
-        Water Only Cokking
+        QuiCook
       </StyledHeaderTitle>
       {isSignedIn ? (
         <StyledHeaderNav>
-          <UserIcon src={chef} alt="usericon" />
+          <UserIcon src={icon ? icon : chef} alt="usericon" />
           <UserName>{username}chef</UserName>
           <li onClick={() => dispatch(signOut())}>ログアウト</li>
         </StyledHeaderNav>
@@ -62,7 +62,7 @@ const StyledHeaderTitle = styled.h1`
   margin: 0;
   font-family: "Amatic SC", cursive;
   color: black;
-  margin-left: 16px;
+  margin-left: 48px;
   font-size: 45px;
   color: #333;
   cursor: pointer;

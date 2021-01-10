@@ -38,7 +38,7 @@ const SiteNavigation: React.FC = () => {
     {
       id: "siteDescription",
       icon: HelpOutlineIcon,
-      label: "water only cookkingとは",
+      label: "QuiCookとは",
       value: "/site/description",
     },
   ];
@@ -62,7 +62,7 @@ export default SiteNavigation;
 const StyledNavigation = styled.nav`
   width: 100%;
   height: 50px;
-  background-color: #90fffa9e;
+  background-color: #8d3535;
   box-shadow: 0px 0px 5px 0px #333;
   line-height: 50px;
 `;
@@ -72,12 +72,16 @@ const StyledMenuList = styled.ul`
   align-items: center;
   justify-content: space-around;
   margin: 0;
+  color: white;
   li {
     display: flex;
     align-items: center;
     padding: 0 16px;
     span {
       margin-left: 8px;
+    }
+    :nth-child(5) {
+      font-family: "Amatic SC", cursive;
     }
     :hover {
       background-color: #333;

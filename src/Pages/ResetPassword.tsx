@@ -100,7 +100,7 @@ const StyledResetButton = styled.button`
   width: 200px;
   margin: 24px auto;
   height: 50px;
-  background-color: #42ffdc;
+  background-color: orange;
   border-radius: 16px;
   outline: none;
   border: none;
