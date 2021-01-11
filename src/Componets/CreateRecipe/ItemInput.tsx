@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const InputItem: React.FC = () => {
+const CookItemInput: React.FC = () => {
   return (
     <div>
       <h2>用意する材料と分量</h2>
@@ -12,6 +12,6 @@ const InputItem: React.FC = () => {
   );
 };
 
-export default InputItem;
+export default CookItemInput;
 
 const StyledInputItem = styled.div``;
