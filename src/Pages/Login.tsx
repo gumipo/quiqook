@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 import Divider from "@material-ui/core/Divider";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -20,6 +20,15 @@ const Login: React.FC = () => {
     }
     dispatch(login(email, password));
   };
+
+  useEffect(() => {
+    if (!err) {
+      return;
+    }
+    setTimeout(() => {
+      setErr(false);
+    }, 2000);
+  }, [err]);
 
   return (
     <StyledLogin>
@@ -93,9 +102,22 @@ const StyledLoginTitle = styled.h1`
   margin: 16px 0 0 8px;
 `;
 
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
 const StyledErrText = styled.p`
   color: red;
   font-size: 16px;
+  display: inline-block;
+  visibility: ${(err) => (err ? "visible" : "hiden")};
+  animation: ${(err) => (err ? fadeOut : "")} 2s linear;
+  transition: visibility 2s linear;
 `;
 
 const StyledUserInputArea = styled.div`

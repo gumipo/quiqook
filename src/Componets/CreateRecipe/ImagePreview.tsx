@@ -24,6 +24,7 @@ const ImagePreview: React.FC<PropsType> = ({ id, deleteImage, path }) => {
     </>
   );
 };
+
 export default ImagePreview;
 
 const StyledImageWrapin = styled.div`

@@ -32,7 +32,6 @@ const ImageArea: React.FC<PropsType> = ({ image, setImage }) => {
 
       let blob = new Blob(file, { type: "image/jpeg" });
 
-      console.log(blob);
       //ramdomな16の文字列を生成しidにする
       const S =
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -79,6 +78,7 @@ const ImageArea: React.FC<PropsType> = ({ image, setImage }) => {
                   />
                 </label>
               </IconButton>
+              <p>※あとからでも登録可能です</p>
             </div>
           </StyledDummyImageArea>
         )}
@@ -110,9 +110,14 @@ const StyledDummyImageArea = styled.div`
     color-stop(0.75, transparent),
     to(transparent)
   );
-  -webkit-background-size: 14px 14px;
+  background-size: 14px 14px;
 
   h4 {
     margin: 0;
+  }
+
+  p {
+    margin: 0;
+    font-size: 12px;
   }
 `;

@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { ImageType } from "./type";
 import ImageArea from "./ImageArea";
 import useStringChange from "../../hooks/useStringChange";
 
 interface PropsType {
-  step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   name: string;
   setName: React.Dispatch<React.SetStateAction<string>>;
@@ -16,7 +15,6 @@ interface PropsType {
 }
 
 const CookNameInput: React.FC<PropsType> = ({
-  step,
   setStep,
   name,
   setName,
@@ -25,6 +23,17 @@ const CookNameInput: React.FC<PropsType> = ({
   image,
   setImage,
 }) => {
+  const [err, setErr] = useState(false);
+
+  const nextStep = () => {
+    if (name.length < 1 || description.length < 1) {
+      setErr(true);
+      return;
+    } else {
+      setStep(2);
+    }
+  };
+
   return (
     <>
       <StyledStepOneWap>
@@ -41,14 +50,17 @@ const CookNameInput: React.FC<PropsType> = ({
           />
           <h3>キャッチコピーや料理の説明</h3>
           <StyledDescriptionInput
-            placeholder="忙しい人のための5分でできる爆速料理"
+            placeholder="500円でできる忙しい人のための5分でできる爆速料理"
             value={description}
             onChange={useStringChange(setDescription)}
             rows={8}
           />
         </StyledInputAreaWrap>
       </StyledStepOneWap>
-      <StyledNextButton onClick={() => setStep(2)}>
+      {err && (
+        <StyledErrText>料理名またはキャッチコピーが見入力です</StyledErrText>
+      )}
+      <StyledNextButton onClick={() => nextStep()}>
         材料入力に進む
       </StyledNextButton>
     </>
@@ -84,4 +96,11 @@ const StyledStepOneWap = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 16px;
+`;
+
+const StyledErrText = styled.p`
+  width: 500px;
+  margin: 10px auto;
+  color: red;
+  text-align: center;
 `;

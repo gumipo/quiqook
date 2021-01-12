@@ -8,7 +8,6 @@ const PopularRecipe: React.FC = () => {
 
   useEffect(() => {
     //ランキング処理
-    console.log("ねこ");
   }, []);
 
   return (
