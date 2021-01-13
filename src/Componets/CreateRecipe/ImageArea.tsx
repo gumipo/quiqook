@@ -25,14 +25,12 @@ const ImageArea: React.FC<PropsType> = ({ image, setImage }) => {
     [image]
   );
 
-  //画像のアップロード
   const uploadImage = useCallback(
     (event) => {
       const file = event.target.files;
 
       let blob = new Blob(file, { type: "image/jpeg" });
 
-      //ramdomな16の文字列を生成しidにする
       const S =
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       const N = 16;

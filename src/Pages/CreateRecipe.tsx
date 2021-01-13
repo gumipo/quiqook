@@ -9,7 +9,7 @@ import {
 } from "../Componets/CreateRecipe/type";
 
 const CreateRecipe: React.FC = () => {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(3);
   // step1
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");

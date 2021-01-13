@@ -69,36 +69,46 @@ export const signUp = (username: string, email: string, password: string) => {
               dispatch(push("/my/recipe"));
             });
         }
+      })
+      .catch(() => {
+        alert("アカウント作成に失敗しました。通信状況を御確かめください");
       });
   };
 };
 
 export const login = (email: string, password: string) => {
   return async (dispatch: Dispatch) => {
-    auth.signInWithEmailAndPassword(email, password).then((result) => {
-      const user = result.user;
-      if (user) {
-        const uid = user.uid;
-        db.collection("users")
-          .doc(uid)
-          .get()
-          .then((snapshot) => {
-            const data = snapshot.data();
-            if (data === undefined) {
-              return null;
-            }
-            dispatch(
-              signInAction({
-                isSignedIn: true,
-                uid: uid,
-                username: data.username,
-                icon: data.icon,
-              })
-            );
-            dispatch(push("/my/recipe"));
-          });
-      }
-    });
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        const user = result.user;
+        if (user) {
+          const uid = user.uid;
+          db.collection("users")
+            .doc(uid)
+            .get()
+            .then((snapshot) => {
+              const data = snapshot.data();
+              if (data === undefined) {
+                return null;
+              }
+              dispatch(
+                signInAction({
+                  isSignedIn: true,
+                  uid: uid,
+                  username: data.username,
+                  icon: data.icon,
+                })
+              );
+              dispatch(push("/my/recipe"));
+            });
+        }
+      })
+      .catch(() => {
+        alert(
+          "ログインに失敗しました。パスワードを御確かめの上もう一度お試しください"
+        );
+      });
   };
 };
 

@@ -18,33 +18,60 @@ const CookItemInput: React.FC<PropsType> = ({
   flavors,
   setFlavors,
 }) => {
+  const [err, setErr] = useState(false);
+  const [materialsIndex, setMaterialsIndex] = useState(0);
+  const [flavorsIndex, setFlavorsIndex] = useState(0);
   const inputMaterialEl = useRef<HTMLInputElement>(null);
   const inputMaterialAmountEl = useRef<HTMLInputElement>(null);
   const inputFlavorEl = useRef<HTMLInputElement>(null);
   const inputFlavorAmountEl = useRef<HTMLInputElement>(null);
 
-  const addMaterial = (material: string, amount: string) => {
+  const addMaterial = (
+    materialsIndex: number,
+    material: string,
+    amount: string
+  ) => {
     if (material.length === 0 || amount.length === 0) {
       return;
     }
-    setMaterials((prevState: MaterialType[]) => [
-      ...prevState,
-      { name: material, amount: amount },
-    ]);
-    inputMaterialEl.current!.value = "";
-    inputMaterialAmountEl.current!.value = "";
+    if (materialsIndex === materials.length) {
+      setMaterials((prevState: MaterialType[]) => [
+        ...prevState,
+        { name: material, amount: amount },
+      ]);
+      setMaterialsIndex(materialsIndex + 1);
+      inputMaterialEl.current!.value = "";
+      inputMaterialAmountEl.current!.value = "";
+    } else {
+      const newMaterials = materials;
+      newMaterials[materialsIndex] = { name: material, amount: amount };
+      setMaterials(newMaterials);
+      setMaterialsIndex(newMaterials.length);
+      inputMaterialEl.current!.value = "";
+      inputMaterialAmountEl.current!.value = "";
+    }
   };
 
-  const addFlavor = (flavor: string, amount: string) => {
+  const addFlavor = (flavorsIndex: number, flavor: string, amount: string) => {
     if (flavor.length === 0 || amount.length === 0) {
       return;
     }
-    setFlavors((prevState: FlavorType[]) => [
-      ...prevState,
-      { name: flavor, amount: amount },
-    ]);
-    inputFlavorEl.current!.value = "";
-    inputFlavorAmountEl.current!.value = "";
+    if (flavorsIndex === flavors.length) {
+      setFlavors((prevState: FlavorType[]) => [
+        ...prevState,
+        { name: flavor, amount: amount },
+      ]);
+      setFlavorsIndex(flavorsIndex + 1);
+      inputFlavorEl.current!.value = "";
+      inputFlavorAmountEl.current!.value = "";
+    } else {
+      const newFlavors = flavors;
+      newFlavors[flavorsIndex] = { name: flavor, amount: amount };
+      setFlavors(newFlavors);
+      setFlavorsIndex(newFlavors.length);
+      inputFlavorEl.current!.value = "";
+      inputFlavorAmountEl.current!.value = "";
+    }
   };
 
   const deleteItem = (former: boolean, index: number) => {
@@ -55,6 +82,40 @@ const CookItemInput: React.FC<PropsType> = ({
     if (!former) {
       const newValues = flavors.filter((item, i) => i !== index);
       setFlavors(newValues);
+    }
+  };
+
+  const editItem = (
+    former: boolean,
+    index: number,
+    name: string,
+    amount: string
+  ) => {
+    if (former) {
+      setMaterialsIndex(index);
+      inputMaterialEl.current!.value = name;
+      inputMaterialAmountEl.current!.value = amount;
+    }
+    if (!former) {
+      setFlavorsIndex(index);
+      inputFlavorEl.current!.value = name;
+      inputFlavorAmountEl.current!.value = amount;
+    }
+  };
+
+  useEffect(() => {
+    setMaterialsIndex(materials.length);
+  }, [materials.length]);
+
+  useEffect(() => {
+    setFlavorsIndex(flavors.length);
+  }, [flavors.length]);
+
+  const nextStep = () => {
+    if (materials.length > 0 && flavors.length > 0) {
+      setStep(3);
+    } else {
+      setErr(true);
     }
   };
 
@@ -76,6 +137,7 @@ const CookItemInput: React.FC<PropsType> = ({
           <StyledItemAddButton
             onClick={() =>
               addMaterial(
+                materialsIndex,
                 inputMaterialEl.current!.value,
                 inputMaterialAmountEl.current!.value
               )
@@ -87,6 +149,7 @@ const CookItemInput: React.FC<PropsType> = ({
             values={materials}
             former={true}
             deleteItem={deleteItem}
+            editItem={editItem}
           />
         </StyledItemListArea>
         <StyledItemListArea>
@@ -104,6 +167,7 @@ const CookItemInput: React.FC<PropsType> = ({
           <StyledItemAddButton
             onClick={() =>
               addFlavor(
+                flavorsIndex,
                 inputFlavorEl.current!.value,
                 inputFlavorAmountEl.current!.value
               )
@@ -115,10 +179,14 @@ const CookItemInput: React.FC<PropsType> = ({
             values={flavors}
             former={false}
             deleteItem={deleteItem}
+            editItem={editItem}
           />
         </StyledItemListArea>
       </StyledInputItem>
-      <StyledNextStepButton>工程入力に進む</StyledNextStepButton>
+      {err && <StyledErrText>材料または調味料が見入力です</StyledErrText>}
+      <StyledNextStepButton onClick={() => nextStep()}>
+        工程入力に進む
+      </StyledNextStepButton>
     </>
   );
 };
@@ -166,4 +234,12 @@ const StyledNextStepButton = styled.button`
   height: 50px;
   background-color: orange;
   margin: 10px auto;
+`;
+
+const StyledErrText = styled.p`
+  width: 500px;
+  margin: 10px auto 0 auto;
+  color: red;
+  text-align: center;
+  font-size: 14px;
 `;

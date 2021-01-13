@@ -1,6 +1,5 @@
 import React from "react";
 import { MaterialType, FlavorType } from "./type";
-import styled from "styled-components";
 //import Table
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
@@ -18,16 +17,31 @@ interface PropsType {
   values: MaterialType[] | FlavorType[];
   former: boolean;
   deleteItem: (former: boolean, index: number) => void;
+  editItem: (
+    former: boolean,
+    index: number,
+    name: string,
+    amount: string
+  ) => void;
 }
 
-const CookItemTable: React.FC<PropsType> = ({ values, former, deleteItem }) => {
+const CookItemTable: React.FC<PropsType> = ({
+  values,
+  former,
+  deleteItem,
+  editItem,
+}) => {
   return (
     <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell align="left">{former ? "材料名" : "調味料名"}</TableCell>
-            <TableCell align="left">分量</TableCell>
+            <TableCell style={{ width: "300px" }} align="left">
+              {former ? "材料名" : "調味料名"}
+            </TableCell>
+            <TableCell style={{ width: "150px" }} align="left">
+              分量
+            </TableCell>
             <TableCell align="right" />
             <TableCell align="right" />
           </TableRow>
@@ -40,14 +54,14 @@ const CookItemTable: React.FC<PropsType> = ({ values, former, deleteItem }) => {
                 <TableCell align="left">{item.amount}</TableCell>
                 <TableCell align="right">
                   <IconButton
-                  // onClick={() => editItem(i, item.size, item.quantity)}
+                    onClick={() => editItem(former, i, item.name, item.amount)}
                   >
-                    <EditIcon />
+                    <EditIcon style={{ width: 20, height: 20 }} />
                   </IconButton>
                 </TableCell>
                 <TableCell align="right">
                   <IconButton onClick={() => deleteItem(former, i)}>
-                    <DeleteIcon />
+                    <DeleteIcon style={{ width: 20, height: 20 }} />
                   </IconButton>
                 </TableCell>
               </TableRow>
