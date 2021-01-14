@@ -28,8 +28,8 @@ const ImagePreview: React.FC<PropsType> = ({ id, deleteImage, path }) => {
 export default ImagePreview;
 
 const StyledImageWrapin = styled.div`
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   border-style: groove;
 `;
 
@@ -41,8 +41,8 @@ const StyledImagePreview = styled.img`
 `;
 
 const StyledDeleteIcon = styled(IconButton)`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: block;
   position: absolute;
   top: -100%;

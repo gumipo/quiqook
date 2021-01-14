@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { storage } from "../../Firebase/index";
-import ImagePreview from "./ImagePreview";
+import MethodImagePreview from "./MethodImagePreview";
 import { ImageType } from "./type";
 import IconButton from "@material-ui/core/IconButton";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
@@ -56,7 +56,7 @@ const ImageArea: React.FC<PropsType> = ({ image, setImage }) => {
     <StyledImageArea>
       <div>
         {image.id !== "" ? (
-          <ImagePreview
+          <MethodImagePreview
             id={image.id}
             path={image.path}
             key={image.id}
@@ -65,8 +65,8 @@ const ImageArea: React.FC<PropsType> = ({ image, setImage }) => {
         ) : (
           <StyledDummyImageArea>
             <div>
-              <h4>料理の画像を登録</h4>
-              <IconButton>
+              <h4>画像を登録</h4>
+              <StyledIconButton>
                 <label>
                   <AddPhotoAlternateIcon />
                   <input
@@ -75,8 +75,7 @@ const ImageArea: React.FC<PropsType> = ({ image, setImage }) => {
                     onChange={(event) => uploadImage(event)}
                   />
                 </label>
-              </IconButton>
-              <p>※あとからでも登録可能です</p>
+              </StyledIconButton>
             </div>
           </StyledDummyImageArea>
         )}
@@ -89,22 +88,22 @@ export default ImageArea;
 const StyledImageArea = styled.div``;
 
 const StyledDummyImageArea = styled.div`
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   border-style: groove;
   display: grid;
   place-items: center;
   text-align: center;
-  background-color: #f4bbbb;
+  background-color: white;
   background-image: -webkit-gradient(
     linear,
     0 0,
     100% 100%,
-    color-stop(0.25, #ffefef),
+    color-stop(0.25, #daeeba),
     color-stop(0.25, transparent),
     color-stop(0.5, transparent),
-    color-stop(0.5, #ffefef),
-    color-stop(0.75, #ffefef),
+    color-stop(0.5, #daeeba),
+    color-stop(0.75, #daeeba),
     color-stop(0.75, transparent),
     to(transparent)
   );
@@ -115,5 +114,14 @@ const StyledDummyImageArea = styled.div`
   p {
     margin: 0;
     font-size: 12px;
+  }
+`;
+
+const StyledIconButton = styled(IconButton)`
+  width: 250px;
+  label {
+    width: 100px;
+    display: flex;
+    justify-content: center;
   }
 `;

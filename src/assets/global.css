@@ -11,3 +11,7 @@ button {
   border-radius: 10px;
   font-size: 16px;
 }
+
+.page-border {
+  border-bottom: 5px solid orange;
+}

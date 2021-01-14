@@ -1,11 +1,12 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import styled from "styled-components";
-import { CookItemInput, CookNameInput } from "../Componets/index";
+import { CookItemInput, CookNameInput, CookMethod } from "../Componets/index";
 import Divider from "@material-ui/core/Divider";
 import {
   ImageType,
   MaterialType,
   FlavorType,
+  MethodListType,
 } from "../Componets/CreateRecipe/type";
 
 const CreateRecipe: React.FC = () => {
@@ -18,6 +19,13 @@ const CreateRecipe: React.FC = () => {
   //step2
   const [materials, setMaterials] = useState<MaterialType[]>([]);
   const [flavors, setFlavors] = useState<FlavorType[]>([]);
+
+  //stpe3
+  const initialMethodState = [
+    { image: { id: "", path: "" }, method: { description: "", time: 0 } },
+  ];
+  const [methods, setMethods] = useState<MethodListType[]>(initialMethodState);
+  const [methodsIndex, setMethodsIndex] = useState(1);
 
   const titleText = useMemo(() => {
     switch (step) {
@@ -35,6 +43,24 @@ const CreateRecipe: React.FC = () => {
 
   const reverceStep = () => {
     setStep((prevStep) => prevStep - 1);
+  };
+
+  useEffect(() => {
+    setMethodsIndex(methods.length);
+  }, [methods.length]);
+
+  const addMethodInputArea = () => {
+    const newMethotsInput = [...methods, ...initialMethodState];
+    console.log(newMethotsInput);
+    setMethods(newMethotsInput);
+  };
+
+  const deleteMethodInputArea = (index: number) => {
+    const isDelete = window.confirm("本当に削除してもよろしいですか？");
+    if (isDelete) {
+      const newMethods = methods.filter((item, i) => i !== index);
+      setMethods(newMethods);
+    }
   };
 
   return (
@@ -67,6 +93,19 @@ const CreateRecipe: React.FC = () => {
           setFlavors={setFlavors}
         />
       )}
+      {step === 3 &&
+        methods.map((method, index) => (
+          <CookMethod
+            method={method}
+            index={index}
+            key={index}
+            setStep={setStep}
+            methods={methods}
+            setMethods={setMethods}
+            deleteMethodInputArea={deleteMethodInputArea}
+            addMethodInputArea={addMethodInputArea}
+          />
+        ))}
     </StyledCreateRecipes>
   );
 };
