@@ -21,11 +21,14 @@ const CreateRecipe: React.FC = () => {
   const [flavors, setFlavors] = useState<FlavorType[]>([]);
 
   //stpe3
-  const initialMethodState = [
-    { image: { id: "", path: "" }, method: { description: "", time: 0 } },
-  ];
-  const [methods, setMethods] = useState<MethodListType[]>(initialMethodState);
-  const [methodsIndex, setMethodsIndex] = useState(1);
+  const initialMethodState: MethodListType = {
+    image: { id: "", path: "" },
+    method: [],
+  };
+
+  const [methods, setMethods] = useState<MethodListType[]>([
+    initialMethodState,
+  ]);
 
   const titleText = useMemo(() => {
     switch (step) {
@@ -45,14 +48,8 @@ const CreateRecipe: React.FC = () => {
     setStep((prevStep) => prevStep - 1);
   };
 
-  useEffect(() => {
-    setMethodsIndex(methods.length);
-  }, [methods.length]);
-
   const addMethodInputArea = () => {
-    const newMethotsInput = [...methods, ...initialMethodState];
-    console.log(newMethotsInput);
-    setMethods(newMethotsInput);
+    setMethods((prevState) => [...prevState, initialMethodState]);
   };
 
   const deleteMethodInputArea = (index: number) => {

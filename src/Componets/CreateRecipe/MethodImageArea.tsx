@@ -1,16 +1,17 @@
 import React, { useCallback } from "react";
 import { storage } from "../../Firebase/index";
 import MethodImagePreview from "./MethodImagePreview";
-import { ImageType } from "./type";
+import { ImageType, MethodListType } from "./type";
 import IconButton from "@material-ui/core/IconButton";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import styled from "styled-components";
 
 interface PropsType {
+  method: MethodListType;
   image: ImageType;
   setImage: React.Dispatch<React.SetStateAction<ImageType>>;
 }
-const ImageArea: React.FC<PropsType> = ({ image, setImage }) => {
+const ImageArea: React.FC<PropsType> = ({ method, image, setImage }) => {
   //画像の削除
   const deleteImage = useCallback(
     async (id): Promise<ImageType | boolean> => {
@@ -55,11 +56,11 @@ const ImageArea: React.FC<PropsType> = ({ image, setImage }) => {
   return (
     <StyledImageArea>
       <div>
-        {image.id !== "" ? (
+        {method.image.id !== "" ? (
           <MethodImagePreview
-            id={image.id}
-            path={image.path}
-            key={image.id}
+            id={method.image.id}
+            path={method.image.path}
+            key={method.image.id}
             deleteImage={deleteImage}
           />
         ) : (

@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
 interface PropsType {
-  description: string;
-  time: number;
+  description: string | null;
+  time: number | null;
   index: number;
   deleteMethodDescription: (index: number) => void;
+  editDescription: (
+    editIndex: number,
+    description: string,
+    time: string
+  ) => void;
 }
 
 const MethodItem: React.FC<PropsType> = ({
@@ -16,21 +21,66 @@ const MethodItem: React.FC<PropsType> = ({
   time,
   index,
   deleteMethodDescription,
+  editDescription,
 }) => {
+  const [isEdit, setIsEdit] = useState(false);
+  const inputDescriptionEl = useRef<HTMLInputElement>(null);
+  const inputTimeEl = useRef<HTMLInputElement>(null);
+
   return (
     <StyledMethodItem>
-      <StyledDescriptionArea>
-        <li>{description}</li>
-      </StyledDescriptionArea>
-      <div>
-        <StyledTime>{time}分</StyledTime>
-        <StyledIconButton>
-          <EditIcon />
-        </StyledIconButton>
-        <StyledIconButton onClick={() => deleteMethodDescription(index)}>
-          <DeleteIcon />
-        </StyledIconButton>
-      </div>
+      {!isEdit ? (
+        <StyledDescriptionArea>
+          <li>{description}</li>
+        </StyledDescriptionArea>
+      ) : (
+        <StyledEditDescription
+          type="text"
+          defaultValue={description!}
+          ref={inputDescriptionEl}
+        />
+      )}
+      <StyledTimeWrap>
+        {!isEdit ? (
+          time !== 0 && <StyledTime>{time}分</StyledTime>
+        ) : (
+          <>
+            <StyledEditTime
+              type="number"
+              step="1"
+              min="0"
+              max="10"
+              placeholder="分"
+              defaultValue={time!}
+              ref={inputTimeEl}
+            />
+            <StyledUnenteredText>分</StyledUnenteredText>
+          </>
+        )}
+        {!isEdit ? (
+          <>
+            <StyledIconButton onClick={() => setIsEdit(true)}>
+              <EditIcon />
+            </StyledIconButton>
+            <StyledIconButton onClick={() => deleteMethodDescription(index)}>
+              <DeleteIcon />
+            </StyledIconButton>
+          </>
+        ) : (
+          <StyledEditButton
+            onClick={() => {
+              editDescription(
+                index,
+                inputDescriptionEl.current!.value,
+                inputTimeEl.current!.value
+              );
+              setIsEdit(false);
+            }}
+          >
+            編集する
+          </StyledEditButton>
+        )}
+      </StyledTimeWrap>
     </StyledMethodItem>
   );
 };
@@ -49,11 +99,46 @@ const StyledDescriptionArea = styled.ul`
 `;
 
 const StyledIconButton = styled(IconButton)`
-  width: 40px;
-  height: 40px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
   background: #fff;
 `;
 
 const StyledTime = styled.span`
   margin-right: 16px;
+  place-items: center;
+  font-size: 14px;
+`;
+
+const StyledTimeWrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledEditDescription = styled.input`
+  display: block;
+  width: 300px;
+  height: 30px;
+  margin-right: 8px;
+`;
+
+const StyledEditTime = styled.input`
+  display: block;
+  width: 40px;
+  height: 30px;
+  margin-right: 8px;
+`;
+
+const StyledUnenteredText = styled.span`
+  font-size: 12px;
+  color: "333";
+  margin-right: 8px;
+`;
+
+const StyledEditButton = styled.button`
+  font-size: 10px;
+  color: white;
+  background: #333;
 `;

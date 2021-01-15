@@ -14,11 +14,11 @@ export interface FlavorType {
 }
 
 export interface MethodType {
-  description: string;
-  time: number;
+  description: string | null;
+  time: number | null;
 }
 
 export interface MethodListType {
   image: ImageType;
-  method: MethodType;
+  method: MethodType[];
 }
