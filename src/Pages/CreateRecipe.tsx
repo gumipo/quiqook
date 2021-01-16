@@ -1,6 +1,11 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import styled from "styled-components";
-import { CookItemInput, CookNameInput, CookMethod } from "../Componets/index";
+import {
+  CookItemInput,
+  CookNameInput,
+  CookMethod,
+  ConfirmationRecipe,
+} from "../Componets/index";
 import Divider from "@material-ui/core/Divider";
 import {
   ImageType,
@@ -10,20 +15,24 @@ import {
 } from "../Componets/CreateRecipe/type";
 
 const CreateRecipe: React.FC = () => {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(4);
   // step1
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState("簡単炒飯");
+  const [description, setDescription] = useState("爆速でできる激ウマ炒飯");
   const [image, setImage] = useState<ImageType>({ id: "", path: "" });
 
   //step2
-  const [materials, setMaterials] = useState<MaterialType[]>([]);
-  const [flavors, setFlavors] = useState<FlavorType[]>([]);
+  const [materials, setMaterials] = useState<MaterialType[]>([
+    { name: "大根", amount: "１切れ" },
+  ]);
+  const [flavors, setFlavors] = useState<FlavorType[]>([
+    { name: "醤油", amount: "大さじ１" },
+  ]);
 
   //stpe3
   const initialMethodState: MethodListType = {
     image: { id: "", path: "" },
-    method: [],
+    method: [{ description: "油を引き炒める", time: 2 }],
   };
 
   const [methods, setMethods] = useState<MethodListType[]>([
@@ -38,6 +47,9 @@ const CreateRecipe: React.FC = () => {
         return "〜材料と調味料リスト作成〜";
       case 3: {
         return "〜料理工程の作成〜";
+      }
+      case 4: {
+        return "〜確認画面〜";
       }
       default:
         break;
@@ -65,10 +77,10 @@ const CreateRecipe: React.FC = () => {
       {step >= 2 && (
         <StyledPrevStep onClick={reverceStep}>← 前のSTEPへ</StyledPrevStep>
       )}
-      <h2>
+      <StyledStep>
         STEP{step}
         <span>{titleText}</span>
-      </h2>
+      </StyledStep>
       <Divider />
       {step === 1 && (
         <CookNameInput
@@ -103,6 +115,17 @@ const CreateRecipe: React.FC = () => {
             addMethodInputArea={addMethodInputArea}
           />
         ))}
+      {step === 4 && (
+        <ConfirmationRecipe
+          name={name}
+          description={description}
+          image={image}
+          materials={materials}
+          flavors={flavors}
+          methods={methods}
+          setStep={setStep}
+        />
+      )}
     </StyledCreateRecipes>
   );
 };
@@ -112,13 +135,14 @@ export default CreateRecipe;
 const StyledCreateRecipes = styled.section`
   width: 100%;
   margin: 24px auto;
-  h2 {
-    width: 1000px;
-    margin: 0 auto;
-    span {
-      font-size: 22px;
-      margin-left: 16px;
-    }
+`;
+
+const StyledStep = styled.h2`
+  width: 1000px;
+  margin: 0 auto;
+  span {
+    font-size: 22px;
+    margin-left: 16px;
   }
 `;
 

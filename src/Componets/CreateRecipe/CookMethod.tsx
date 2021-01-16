@@ -3,7 +3,6 @@ import styled from "styled-components";
 import MethodImageArea from "./MethodImageArea";
 import { ImageType, MethodListType, MethodType } from "./type";
 import MethodItem from "./MethodItem";
-import { SettingsRemoteRounded } from "@material-ui/icons";
 
 interface PropsType {
   setStep: React.Dispatch<React.SetStateAction<number>>;
@@ -212,7 +211,7 @@ const StyledUnit = styled.span`
 `;
 
 const StyledAddButton = styled.button`
-  background-color: #58e458;
+  background-color: #e0f3bc;
   width: 60px;
 `;
 
@@ -229,12 +228,12 @@ const ButtonArea = styled.div`
 `;
 
 const StyledAddInputAreaButton = styled.button`
-  background-color: #41d141;
+  background-color: #e0f3bc;
 `;
 
 const StyledDeleteInputAreaButton = styled.button`
   color: white;
-  background-color: #b43232;
+  background-color: #ff0000;
 `;
 
 const NextStepButton = styled.button`
@@ -242,7 +241,7 @@ const NextStepButton = styled.button`
   width: 300px;
   height: 50px;
   margin: 0 auto;
-  background-color: #67ff67;
+  background-color: beige;
 `;
 
 const StyledUnenteredText = styled.span`

@@ -98,6 +98,7 @@ const StyledDescription = styled.div`
   box-shadow: 30px 30px 0px #333;
   img {
     width: 500px;
+    object-fit: cover;
   }
 `;
 

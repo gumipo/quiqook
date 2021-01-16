@@ -78,7 +78,7 @@ const StyledNextButton = styled.button`
   display: block;
   width: 300px;
   height: 50px;
-  background-color: orange;
+  background-color: beige;
   outline: none;
   margin: 24px auto;
 `;

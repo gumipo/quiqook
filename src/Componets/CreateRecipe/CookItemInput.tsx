@@ -225,14 +225,15 @@ const StyledAmountInput = styled.input`
 const StyledItemAddButton = styled.button`
   width: 80px;
   height: 40px;
-  background-color: #45d645;
+  background-color: #e0f3bc;
+  color: #333;
 `;
 
 const StyledNextStepButton = styled.button`
   display: block;
   width: 300px;
   height: 50px;
-  background-color: orange;
+  background-color: beige;
   margin: 10px auto;
 `;
 

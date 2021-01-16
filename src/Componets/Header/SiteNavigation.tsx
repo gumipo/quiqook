@@ -62,7 +62,7 @@ export default SiteNavigation;
 const StyledNavigation = styled.nav`
   width: 100%;
   height: 50px;
-  background-color: #8d3535;
+  background-color: #005500;
   box-shadow: 0px 0px 5px 0px #333;
   line-height: 50px;
 `;

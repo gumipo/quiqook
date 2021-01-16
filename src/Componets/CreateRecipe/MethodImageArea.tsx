@@ -100,11 +100,11 @@ const StyledDummyImageArea = styled.div`
     linear,
     0 0,
     100% 100%,
-    color-stop(0.25, #daeeba),
+    color-stop(0.25, #e0f3bc),
     color-stop(0.25, transparent),
     color-stop(0.5, transparent),
-    color-stop(0.5, #daeeba),
-    color-stop(0.75, #daeeba),
+    color-stop(0.5, #e0f3bc),
+    color-stop(0.75, #e0f3bc),
     color-stop(0.75, transparent),
     to(transparent)
   );

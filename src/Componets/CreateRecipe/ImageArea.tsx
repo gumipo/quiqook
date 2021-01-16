@@ -95,16 +95,16 @@ const StyledDummyImageArea = styled.div`
   display: grid;
   place-items: center;
   text-align: center;
-  background-color: #f4bbbb;
+  background-color: white;
   background-image: -webkit-gradient(
     linear,
     0 0,
     100% 100%,
-    color-stop(0.25, #ffefef),
+    color-stop(0.25, #e0f3bc),
     color-stop(0.25, transparent),
     color-stop(0.5, transparent),
-    color-stop(0.5, #ffefef),
-    color-stop(0.75, #ffefef),
+    color-stop(0.5, #e0f3bc),
+    color-stop(0.75, #e0f3bc),
     color-stop(0.75, transparent),
     to(transparent)
   );

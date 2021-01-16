@@ -6,3 +6,4 @@ export { default as ImageArea } from "./CreateRecipe/ImageArea";
 export { default as CookNameInput } from "./CreateRecipe/CookNameInput";
 export { default as MyRecipeList } from "./UserRecipes/MyRecipeList";
 export { default as CookMethod } from "./CreateRecipe/CookMethod";
+export { default as ConfirmationRecipe } from "./CreateRecipe/ConfirmationRecipe";
