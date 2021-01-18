@@ -23,7 +23,7 @@ const Router: React.FC = () => {
       <Route exact path="/all/recipe" component={AllRecipes} />
       <Auth>
         <Route exact path="/my/recipe" component={UserRecipe} />
-        <Route exact path="/create/recipe" component={CreateRecipe} />
+        <Route exact path="/create/recipe/:id?" component={CreateRecipe} />
       </Auth>
     </Switch>
   );

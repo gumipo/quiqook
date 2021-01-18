@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import styled from "styled-components";
-import { MaterialType, FlavorType } from "./type";
+import { MaterialType, FlavorType, MethodListType } from "./type";
 import CookItemTable from "./CookItemITable";
 
 interface PropsType {
@@ -9,6 +9,7 @@ interface PropsType {
   setMaterials: React.Dispatch<React.SetStateAction<MaterialType[]>>;
   flavors: FlavorType[];
   setFlavors: React.Dispatch<React.SetStateAction<FlavorType[]>>;
+  methods: MethodListType[];
 }
 
 const CookItemInput: React.FC<PropsType> = ({
@@ -17,6 +18,7 @@ const CookItemInput: React.FC<PropsType> = ({
   setMaterials,
   flavors,
   setFlavors,
+  methods,
 }) => {
   const [err, setErr] = useState(false);
   const [materialsIndex, setMaterialsIndex] = useState(0);
@@ -119,6 +121,10 @@ const CookItemInput: React.FC<PropsType> = ({
     }
   };
 
+  const validMethods = useMemo(() => {
+    return methods.filter((item) => item.method.length !== 0);
+  }, []);
+
   return (
     <>
       <StyledInputItem>
@@ -187,6 +193,11 @@ const CookItemInput: React.FC<PropsType> = ({
       <StyledNextStepButton onClick={() => nextStep()}>
         工程入力に進む
       </StyledNextStepButton>
+      {validMethods.length > 0 && (
+        <StyledConfirmStepButton onClick={() => setStep(4)}>
+          確認画面へ
+        </StyledConfirmStepButton>
+      )}
     </>
   );
 };
@@ -243,4 +254,13 @@ const StyledErrText = styled.p`
   color: red;
   text-align: center;
   font-size: 14px;
+`;
+
+const StyledConfirmStepButton = styled.button`
+  display: block;
+  width: 300px;
+  height: 50px;
+  background-color: beige;
+  outline: none;
+  margin: 24px auto;
 `;

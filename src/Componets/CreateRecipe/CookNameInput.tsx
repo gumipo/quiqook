@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import styled from "styled-components";
-import { ImageType } from "./type";
+import { ImageType, MethodListType } from "./type";
 import ImageArea from "./ImageArea";
 import useStringChange from "../../hooks/useStringChange";
 
@@ -12,6 +12,7 @@ interface PropsType {
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   image: ImageType;
   setImage: React.Dispatch<React.SetStateAction<ImageType>>;
+  methods: MethodListType[];
 }
 
 const CookNameInput: React.FC<PropsType> = ({
@@ -22,6 +23,7 @@ const CookNameInput: React.FC<PropsType> = ({
   setDescription,
   image,
   setImage,
+  methods,
 }) => {
   const [err, setErr] = useState(false);
 
@@ -33,6 +35,10 @@ const CookNameInput: React.FC<PropsType> = ({
       setStep(2);
     }
   };
+
+  const validMethods = useMemo(() => {
+    return methods.filter((item) => item.method.length !== 0);
+  }, []);
 
   return (
     <>
@@ -63,6 +69,11 @@ const CookNameInput: React.FC<PropsType> = ({
       <StyledNextButton onClick={() => nextStep()}>
         材料入力に進む
       </StyledNextButton>
+      {validMethods.length > 0 && (
+        <StyledConfirmStepButton onClick={() => setStep(4)}>
+          確認画面へ
+        </StyledConfirmStepButton>
+      )}
     </>
   );
 };
@@ -103,4 +114,13 @@ const StyledErrText = styled.p`
   margin: 10px auto;
   color: red;
   text-align: center;
+`;
+
+const StyledConfirmStepButton = styled.button`
+  display: block;
+  width: 300px;
+  height: 50px;
+  background-color: beige;
+  outline: none;
+  margin: 24px auto;
 `;

@@ -15,24 +15,20 @@ import {
 } from "../Componets/CreateRecipe/type";
 
 const CreateRecipe: React.FC = () => {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
   // step1
-  const [name, setName] = useState("簡単炒飯");
-  const [description, setDescription] = useState("爆速でできる激ウマ炒飯");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState<ImageType>({ id: "", path: "" });
 
   //step2
-  const [materials, setMaterials] = useState<MaterialType[]>([
-    { name: "大根", amount: "１切れ" },
-  ]);
-  const [flavors, setFlavors] = useState<FlavorType[]>([
-    { name: "醤油", amount: "大さじ１" },
-  ]);
+  const [materials, setMaterials] = useState<MaterialType[]>([]);
+  const [flavors, setFlavors] = useState<FlavorType[]>([]);
 
   //stpe3
   const initialMethodState: MethodListType = {
     image: { id: "", path: "" },
-    method: [{ description: "油を引き炒める", time: 2 }],
+    method: [],
   };
 
   const [methods, setMethods] = useState<MethodListType[]>([
@@ -91,6 +87,7 @@ const CreateRecipe: React.FC = () => {
           setDescription={setDescription}
           image={image}
           setImage={setImage}
+          methods={methods}
         />
       )}
       {step === 2 && (
@@ -100,6 +97,7 @@ const CreateRecipe: React.FC = () => {
           setMaterials={setMaterials}
           flavors={flavors}
           setFlavors={setFlavors}
+          methods={methods}
         />
       )}
       {step === 3 &&

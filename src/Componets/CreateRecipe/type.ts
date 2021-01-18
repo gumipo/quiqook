@@ -14,8 +14,8 @@ export interface FlavorType {
 }
 
 export interface MethodType {
-  description: string | null;
-  time: number | null;
+  description: string;
+  time: number;
 }
 
 export interface MethodListType {
