@@ -1,21 +1,48 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import HeaderIcons from "./HeaderIcons";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {
+  getUserIcon,
+  getIsSignedIn,
+  getUserName,
+} from "../../reducks/Users/selector";
+import { listenAuthState, signOut } from "../../reducks/Users/oparations";
+import chef from "../../assets/Images/chef.png";
 
 const Header: React.FC = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const icon = getUserIcon(selector);
+  const isSignedIn = getIsSignedIn(selector);
+  const username = getUserName(selector);
+
+  useEffect(() => {
+    dispatch(listenAuthState());
+  }, []);
 
   return (
     <StyledHeader>
       <HeaderIcons isReverce={false} />
       <StyledHeaderTitle onClick={() => history.push("/")}>
-        Water Only Cokking
+        QuiCook
       </StyledHeaderTitle>
-      <StyledHeaderNav>
-        <li onClick={() => history.push("/signin")}>新規登録</li>
-        <li onClick={() => history.push("/login")}>ログイン</li>
-      </StyledHeaderNav>
+      {isSignedIn ? (
+        <StyledHeaderNav>
+          <UserIcon src={icon ? icon : chef} alt="usericon" />
+          <UserName>{username}chef</UserName>
+          <li onClick={() => dispatch(signOut())}>ログアウト</li>
+        </StyledHeaderNav>
+      ) : (
+        <StyledHeaderNav>
+          <li onClick={() => history.push("/signup")}>新規登録</li>
+          <li onClick={() => history.push("/login")}>ログイン</li>
+        </StyledHeaderNav>
+      )}
+
       <HeaderIcons isReverce={true} />
     </StyledHeader>
   );
@@ -24,8 +51,6 @@ const Header: React.FC = () => {
 export default Header;
 
 const StyledHeader = styled.header`
-  position: fixed;
-  top: 0;
   width: 100%;
   height: 80px;
   display: flex;
@@ -37,10 +62,21 @@ const StyledHeaderTitle = styled.h1`
   margin: 0;
   font-family: "Amatic SC", cursive;
   color: black;
-  margin-left: 16px;
+  margin-left: 48px;
   font-size: 45px;
   color: #333;
   cursor: pointer;
+`;
+
+const UserIcon = styled.img`
+  width: 42px;
+  height: 42px;
+  border-radius: 21px;
+`;
+
+const UserName = styled.p`
+  width: 80px;
+  font-size: 12px;
 `;
 
 const StyledHeaderNav = styled.ul`

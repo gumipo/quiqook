@@ -1,0 +1,17 @@
+input:focus::placeholder {
+  color: transparent;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+button {
+  outline: none;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.page-border {
+  border-bottom: 5px solid orange;
+}
