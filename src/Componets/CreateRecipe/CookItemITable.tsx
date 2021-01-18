@@ -1,5 +1,6 @@
 import React from "react";
 import { MaterialType, FlavorType } from "./type";
+import { makeStyles } from "@material-ui/core/styles";
 //import Table
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
@@ -24,6 +25,23 @@ interface PropsType {
     amount: string
   ) => void;
 }
+
+const useStyles = makeStyles((theme) => ({
+  cell: {
+    [theme.breakpoints.down("sm")]: {
+      margin: "0 auto",
+      height: 200,
+      width: 300,
+      outLine: "none",
+    },
+    [theme.breakpoints.up("sm")]: {
+      margin: "0 auto",
+      height: 200,
+      width: 300,
+      outLine: "none",
+    },
+  },
+}));
 
 const CookItemTable: React.FC<PropsType> = ({
   values,

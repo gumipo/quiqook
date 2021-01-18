@@ -209,15 +209,24 @@ const StyledInputItem = styled.div`
   margin: 16px auto;
   display: flex;
   justify-content: space-around;
+  @media screen and (max-width: 767px) {
+    width: 375px;
+    flex-direction: column;
+  }
 `;
 
 const StyledItemListArea = styled.div`
   width: 500px;
+  margin-left: 5px;
 `;
 
 const StyledItemTitle = styled.h3`
   font-size: 24px;
   margin: 0;
+  @media screen and (max-width: 767px) {
+    font-size: 16px;
+    margin: 16px 0 0 0;
+  }
 `;
 
 const StyledNameInput = styled.input`
@@ -225,12 +234,20 @@ const StyledNameInput = styled.input`
   height: 40px;
   margin-bottom: 16px;
   margin-right: 8px;
+  @media screen and (max-width: 767px) {
+    width: 250px;
+    height: 30px;
+  }
 `;
 
 const StyledAmountInput = styled.input`
   width: 100px;
   height: 40px;
   margin-right: 8px;
+  @media screen and (max-width: 767px) {
+    width: 50px;
+    height: 30px;
+  }
 `;
 
 const StyledItemAddButton = styled.button`
@@ -238,6 +255,10 @@ const StyledItemAddButton = styled.button`
   height: 40px;
   background-color: #e0f3bc;
   color: #333;
+  @media screen and (max-width: 767px) {
+    width: 50px;
+    height: 30px;
+  }
 `;
 
 const StyledNextStepButton = styled.button`

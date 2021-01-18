@@ -56,6 +56,10 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 767px) {
+    height: 60px;
+    box-shadow: 0px 3px 6px black;
+  }
 `;
 
 const StyledHeaderTitle = styled.h1`
@@ -66,6 +70,11 @@ const StyledHeaderTitle = styled.h1`
   font-size: 45px;
   color: #333;
   cursor: pointer;
+  @media screen and (max-width: 767px) {
+    width: 100px;
+    margin-left: 32px;
+    font-size: 32px;
+  }
 `;
 
 const UserIcon = styled.img`
@@ -85,6 +94,10 @@ const StyledHeaderNav = styled.ul`
   align-items: center;
   justify-content: center;
   margin-left: 16px;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    font-size: 12px;
+  }
   li {
     list-style: none;
     text-decoration: none;

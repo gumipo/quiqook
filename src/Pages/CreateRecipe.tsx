@@ -138,9 +138,18 @@ const StyledCreateRecipes = styled.section`
 const StyledStep = styled.h2`
   width: 1000px;
   margin: 0 auto;
+  @media screen and (max-width: 767px) {
+    width: 350px;
+    font-size: 14px;
+    margin-left: 16px;
+  }
   span {
     font-size: 22px;
     margin-left: 16px;
+    @media screen and (max-width: 767px) {
+      width: 375px;
+      font-size: 16px;
+    }
   }
 `;
 

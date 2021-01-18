@@ -95,11 +95,17 @@ const StyledLogin = styled.section`
   width: 800px;
   margin: 0 auto;
   text-align: center;
+  @media screen and (max-width: 767px) {
+    width: 375px;
+  }
 `;
 
 const StyledLoginTitle = styled.h1`
   text-align: left;
   margin: 16px 0 0 8px;
+  @media screen and (max-width: 767px) {
+    font-size: 24px;
+  }
 `;
 
 const fadeOut = keyframes`
@@ -131,15 +137,30 @@ const StyledInputArea = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 16px;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    margin-top: 8px;
+  }
 
   span {
     margin-left: 16px;
+    @media screen and (max-width: 767px) {
+      width: 300px;
+      text-align: left;
+      margin-left: 0;
+      font-size: 14px;
+    }
   }
   input {
     width: 600px;
     height: 50px;
     margin-right: 16px;
     font-size: 18px;
+    @media screen and (max-width: 767px) {
+      width: 300px;
+      height: 30px;
+      margin: 0 auto;
+    }
   }
 `;
 
@@ -148,11 +169,13 @@ const StyledLoginButton = styled.button`
   width: 200px;
   margin: 24px auto;
   height: 50px;
-  background-color: orange;
+  background-color: hsl(111deg 100% 79%);
   border-radius: 16px;
   outline: none;
   border: none;
   cursor: pointer;
+  @media screen and (max-width: 767px) {
+  }
 `;
 
 const StyledSnsLogin = styled.div`
@@ -160,11 +183,15 @@ const StyledSnsLogin = styled.div`
   margin: 16px auto;
   display: flex;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    width: 375px;
+    flex-direction: column;
+  }
   button {
     outline: none;
     width: 300px;
     height: 50px;
-    margin: 0 15px;
+    margin: 8px 15px;
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
@@ -186,6 +213,9 @@ const StyledSnsLogin = styled.div`
 
 const StyledText = styled.p`
   margin-top: 30px;
+  @media screen and (max-width: 767px) {
+    font-size: 14px;
+  }
   span {
     color: blue;
     border-bottom: 2px solid blue;

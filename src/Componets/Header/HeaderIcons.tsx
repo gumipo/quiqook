@@ -41,6 +41,9 @@ const StyledHeaderIconsList = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 50px;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
   img {
     width: 30px;
     height: 30px;

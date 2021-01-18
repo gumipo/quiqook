@@ -48,7 +48,7 @@ const SiteNavigation: React.FC = () => {
       <StyledMenuList>
         {navMenus.map((menu) => (
           <li key={menu.id} onClick={() => history.push(menu.value)}>
-            <menu.icon />
+            <menu.icon style={{ width: 20 }} />
             <span>{menu.label}</span>
           </li>
         ))}
@@ -65,6 +65,11 @@ const StyledNavigation = styled.nav`
   background-color: #005500;
   box-shadow: 0px 0px 5px 0px #333;
   line-height: 50px;
+  @media screen and (max-width: 767px) {
+    position: fixed;
+    bottom: 0;
+    line-height: 20px;
+  }
 `;
 
 const StyledMenuList = styled.ul`
@@ -73,12 +78,21 @@ const StyledMenuList = styled.ul`
   justify-content: space-around;
   margin: 0;
   color: white;
+  font-size: 10px;
+  width: 100%;
   li {
     display: flex;
     align-items: center;
     padding: 0 16px;
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+      padding: 0;
+    }
     span {
       margin-left: 8px;
+      @media screen and (max-width: 767px) {
+        margin: 0;
+      }
     }
     :nth-child(5) {
       font-family: "Amatic SC", cursive;
