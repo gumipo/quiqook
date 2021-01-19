@@ -126,6 +126,9 @@ const StyledConfirmationRecipe = styled.div`
   background: #ffffff;
   border-radius: 16px;
   box-shadow: 0px 0px 10px 5px #333;
+  @media screen and (max-width: 767px) {
+    width: 350px;
+  }
 `;
 
 const StyledFixButton = styled.button`
@@ -135,6 +138,9 @@ const StyledFixButton = styled.button`
   background: beige;
   margin: 16px auto;
   cursor: pointer;
+  @media screen and (max-width: 767px) {
+    width: 100px;
+  }
 `;
 
 const StyledRecipeTitle = styled.h2`
@@ -142,20 +148,36 @@ const StyledRecipeTitle = styled.h2`
   font-size: 30px;
   color: #333;
   margin: 0;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    font-size: 18px;
+    margin-left: 16px;
+  }
 `;
 
 const StyledRecipeFirstStep = styled.div`
   width: 700px;
   margin: 0 auto;
   margin-top: 50px;
+  @media screen and (max-width: 767px) {
+    width: 330px;
+  }
 `;
 
 const StyledRecipeDescription = styled.div`
   h3 {
     margin: 16px 0 0 0;
+    @media screen and (max-width: 767px) {
+      font-size: 16px;
+      margin-left: 16px;
+    }
   }
   p {
     margin: 0;
+    @media screen and (max-width: 767px) {
+      font-size: 14px;
+      margin-left: 16px;
+    }
   }
 `;
 
@@ -163,12 +185,20 @@ const StyledRecipeImage = styled.img`
   width: 400px;
   height: auto;
   border: 2px solid #333;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    margin-left: 16px;
+  }
 `;
 
 const StyledSecondStepTitle = styled.h2`
   font-size: 26px;
   width: 700px;
   margin: 30px auto 0 auto;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    font-size: 16px;
+  }
 `;
 
 const StyledRecipeSecondStep = styled.div`
@@ -176,6 +206,10 @@ const StyledRecipeSecondStep = styled.div`
   margin: 16px auto 32px auto;
   display: flex;
   justify-content: space-around;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    flex-direction: column;
+  }
 `;
 
 const StyledMaterilasWrap = styled.div`
@@ -184,11 +218,26 @@ const StyledMaterilasWrap = styled.div`
   padding: 16px;
   border-radius: 16px;
   background: #abf1ab;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    margin-bottom: 8px;
+  }
   　h3 {
     margin: 0 0 16px 0;
+    @media screen and (max-width: 767px) {
+      font-size: 14px;
+    }
+  }
+  li {
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+    }
   }
   p {
     margin: 0 0 0 16px;
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+    }
   }
 `;
 
@@ -202,11 +251,26 @@ const StyledFlavorsWrap = styled.div`
   padding: 16px;
   border-radius: 16px;
   background: #ffd7c7;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+  }
   　h3 {
     margin: 0 0 16px 0;
+    @media screen and (max-width: 767px) {
+      font-size: 14px;
+    }
   }
+  li {
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+    }
+  }
+
   p {
     margin: 0 0 0 16px;
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+    }
   }
 `;
 
@@ -219,11 +283,20 @@ const StyledThirdStepTitle = styled.h2`
   font-size: 26px;
   width: 700px;
   margin: 60px auto 0 auto;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    margin-left: 16px;
+    font-size: 16px;
+  }
 `;
 
 const StyledRecipeThirdStep = styled.div`
   width: 700px;
   margin: 0 auto;
+  @media screen and (max-width: 767px) {
+    width: 320px;
+    margin-left: 16px;
+  }
 `;
 
 const StyledMethodImage = styled.img`
@@ -231,11 +304,19 @@ const StyledMethodImage = styled.img`
   height: 300px;
   object-fit: cover;
   margin-right: 16px;
+  border-style: groove;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    height: 200px;
+  }
 `;
 
 const StyledMethodsArea = styled.div`
   display: flex;
   margin-top: 8px;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledMethodDescription = styled.ul`
@@ -253,4 +334,9 @@ const StyledRegisterButton = styled.button`
   margin: 24px auto;
   background-color: #aae2aa;
   color: #333;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    height: 30px;
+    margin-bottom: 80px;
+  }
 `;

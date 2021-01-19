@@ -31,6 +31,11 @@ const StyledImageWrapin = styled.div`
   width: 400px;
   height: 400px;
   border-style: groove;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+  }
 `;
 
 const StyledImagePreview = styled.img`
@@ -47,4 +52,7 @@ const StyledDeleteIcon = styled(IconButton)`
   position: absolute;
   top: -100%;
   right: -90%;
+  @media screen and (max-width: 767px) {
+    right: -85%;
+  }
 `;

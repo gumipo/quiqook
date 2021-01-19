@@ -34,7 +34,9 @@ const Header: React.FC = () => {
         <StyledHeaderNav>
           <UserIcon src={icon ? icon : chef} alt="usericon" />
           <UserName>{username}chef</UserName>
-          <li onClick={() => dispatch(signOut())}>ログアウト</li>
+          <StyledLogOutButton onClick={() => dispatch(signOut())}>
+            ログアウト
+          </StyledLogOutButton>
         </StyledHeaderNav>
       ) : (
         <StyledHeaderNav>
@@ -81,6 +83,10 @@ const UserIcon = styled.img`
   width: 42px;
   height: 42px;
   border-radius: 21px;
+  @media screen and (max-width: 767px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const UserName = styled.p`
@@ -106,5 +112,12 @@ const StyledHeaderNav = styled.ul`
     :hover {
       color: aqua;
     }
+  }
+`;
+
+const StyledLogOutButton = styled.li`
+  @media screen and (max-width: 767px) {
+    width: 90px;
+    font-size: 10px;
   }
 `;

@@ -38,14 +38,14 @@ const CreateRecipe: React.FC = () => {
   const titleText = useMemo(() => {
     switch (step) {
       case 1:
-        return "〜料理名、キャッチコピーの作成〜";
+        return "料理名、キャッチコピーの作成";
       case 2:
-        return "〜材料と調味料リスト作成〜";
+        return "材料と調味料リスト作成";
       case 3: {
-        return "〜料理工程の作成〜";
+        return "料理工程の作成";
       }
       case 4: {
-        return "〜確認画面〜";
+        return "確認画面";
       }
       default:
         break;
@@ -133,13 +133,16 @@ export default CreateRecipe;
 const StyledCreateRecipes = styled.section`
   width: 100%;
   margin: 24px auto;
+  @media screen and (max-width: 767px) {
+    width: 360px;
+  }
 `;
 
 const StyledStep = styled.h2`
   width: 1000px;
   margin: 0 auto;
   @media screen and (max-width: 767px) {
-    width: 350px;
+    width: 300px;
     font-size: 14px;
     margin-left: 16px;
   }
@@ -147,7 +150,7 @@ const StyledStep = styled.h2`
     font-size: 22px;
     margin-left: 16px;
     @media screen and (max-width: 767px) {
-      width: 375px;
+      width: 300px;
       font-size: 16px;
     }
   }
@@ -160,4 +163,7 @@ const StyledPrevStep = styled.p`
   color: #333;
   opacity: 0.5;
   margin: 0 auto;
+  @media screen and (max-width: 767px) {
+    width: 350px;
+  }
 `;

@@ -109,6 +109,11 @@ const StyledDummyImageArea = styled.div`
     to(transparent)
   );
   background-size: 14px 14px;
+  @media screen and (max-width: 767px) {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+  }
   h4 {
     margin: 0;
   }
@@ -120,6 +125,7 @@ const StyledDummyImageArea = styled.div`
 
 const StyledIconButton = styled(IconButton)`
   width: 250px;
+
   label {
     width: 100px;
     display: flex;

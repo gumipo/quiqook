@@ -20,6 +20,6 @@ export default function createStore(history: History.History) {
       router: connectRouter(history),
       users: UsersReducer,
     }),
-    composeEnhancers(applyMiddleware(routerMiddleware(history), thunk))
+    applyMiddleware(routerMiddleware(history), thunk)
   );
 }

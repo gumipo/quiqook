@@ -27,18 +27,40 @@ interface PropsType {
 }
 
 const useStyles = makeStyles((theme) => ({
+  table: {
+    [theme.breakpoints.down("sm")]: {
+      width: 350,
+    },
+  },
   cell: {
     [theme.breakpoints.down("sm")]: {
-      margin: "0 auto",
-      height: 200,
       width: 300,
-      outLine: "none",
     },
     [theme.breakpoints.up("sm")]: {
-      margin: "0 auto",
-      height: 200,
       width: 300,
-      outLine: "none",
+    },
+  },
+  mincell: {
+    [theme.breakpoints.down("sm")]: {
+      width: 150,
+      height: 30,
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: 150,
+    },
+  },
+  icon: {
+    [theme.breakpoints.down("sm")]: {
+      width: 18,
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: 20,
+    },
+  },
+  iconbutton: {
+    [theme.breakpoints.down("sm")]: {
+      width: 18,
+      height: 18,
     },
   },
 }));
@@ -49,15 +71,16 @@ const CookItemTable: React.FC<PropsType> = ({
   deleteItem,
   editItem,
 }) => {
+  const classes = useStyles();
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={classes.table}>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell style={{ width: "300px" }} align="left">
+            <TableCell className={classes.cell} align="left">
               {former ? "材料名" : "調味料名"}
             </TableCell>
-            <TableCell style={{ width: "150px" }} align="left">
+            <TableCell className={classes.mincell} align="left">
               分量
             </TableCell>
             <TableCell align="right" />
@@ -72,14 +95,18 @@ const CookItemTable: React.FC<PropsType> = ({
                 <TableCell align="left">{item.amount}</TableCell>
                 <TableCell align="right">
                   <IconButton
+                    className={classes.iconbutton}
                     onClick={() => editItem(former, i, item.name, item.amount)}
                   >
-                    <EditIcon style={{ width: 20, height: 20 }} />
+                    <EditIcon className={classes.icon} />
                   </IconButton>
                 </TableCell>
                 <TableCell align="right">
-                  <IconButton onClick={() => deleteItem(former, i)}>
-                    <DeleteIcon style={{ width: 20, height: 20 }} />
+                  <IconButton
+                    className={classes.iconbutton}
+                    onClick={() => deleteItem(former, i)}
+                  >
+                    <DeleteIcon className={classes.icon} />
                   </IconButton>
                 </TableCell>
               </TableRow>

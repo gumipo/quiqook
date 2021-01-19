@@ -77,7 +77,7 @@ const MethodItem: React.FC<PropsType> = ({
               setIsEdit(false);
             }}
           >
-            編集する
+            変更
           </StyledEditButton>
         )}
       </StyledTimeWrap>
@@ -92,6 +92,9 @@ const StyledMethodItem = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 0;
+  @media screen and (max-width: 767px) {
+    width: 333px;
+  }
 `;
 
 const StyledDescriptionArea = styled.ul`
@@ -129,16 +132,26 @@ const StyledEditTime = styled.input`
   width: 40px;
   height: 30px;
   margin-right: 8px;
+  @media screen and (max-width: 767px) {
+    width: 40px;
+  }
 `;
 
 const StyledUnenteredText = styled.span`
   font-size: 12px;
   color: "333";
   margin-right: 8px;
+  @media screen and (max-width: 767px) {
+    font-size: 10px;
+  }
 `;
 
 const StyledEditButton = styled.button`
   font-size: 10px;
   color: white;
   background: #333;
+  @media screen and (max-width: 767px) {
+    width: 60px;
+    height: 30px;
+  }
 `;

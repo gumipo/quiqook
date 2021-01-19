@@ -97,6 +97,7 @@ const StyledLogin = styled.section`
   text-align: center;
   @media screen and (max-width: 767px) {
     width: 375px;
+    margin: 0 auto 100px auto;
   }
 `;
 

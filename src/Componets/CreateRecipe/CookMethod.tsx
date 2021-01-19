@@ -33,7 +33,7 @@ const CookMethod: React.FC<PropsType> = ({
     description: string,
     time: string
   ) => {
-    if (description.length > 3) {
+    if (description.length > 1) {
       const numberTime = Number(time);
       const newMethods = methods;
       newMethods[index].method = [
@@ -72,9 +72,8 @@ const CookMethod: React.FC<PropsType> = ({
   const nextStep = () => {
     const validConfirm = methods.filter((item) => item.method.length === 0);
     if (validConfirm.length > 0) {
-      const res = window.confirm(
-        "内容が未入力のものは削除されますがよろしいですか？"
-      );
+      const res = true;
+
       if (res) {
         const validMethods = methods.filter((item) => item.method.length !== 0);
         if (validMethods.length === 0) {
@@ -98,7 +97,7 @@ const CookMethod: React.FC<PropsType> = ({
   }, [image]);
 
   return (
-    <>
+    <StyledWrap>
       <StyledCookMethod>
         <MethodImageArea method={method} image={image} setImage={setImage} />
         <StyledMethodInputArea>
@@ -172,24 +171,34 @@ const CookMethod: React.FC<PropsType> = ({
           </NextStepButton>
         </div>
       )}
-    </>
+    </StyledWrap>
   );
 };
 
 export default CookMethod;
+
+const StyledWrap = styled.div``;
 
 const StyledCookMethod = styled.div`
   width: 800px;
   margin: 24px auto;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 767px) {
+    width: 360px;
+    flex-direction: column;
+  }
 `;
 
 const StyledMethodInputArea = styled.div`
   margin-left: 16px;
+  margin-top: 16px;
   h3 {
     font-size: 16px;
     margin: 0;
+    @media screen and (max-width: 767px) {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -197,6 +206,9 @@ const StyledDescriptionInput = styled.input`
   width: 300px;
   margin: 0 8px 0 0;
   height: 30px;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+  }
 `;
 
 const StyledTimeInput = styled.input`
@@ -213,6 +225,11 @@ const StyledUnit = styled.span`
 const StyledAddButton = styled.button`
   background-color: #e0f3bc;
   width: 60px;
+  @media screen and (max-width: 767px) {
+    width: 60px;
+    height: 30px;
+    font-size: 12px;
+  }
 `;
 
 const ButtonArea = styled.div`
@@ -242,6 +259,12 @@ const NextStepButton = styled.button`
   height: 50px;
   margin: 0 auto;
   background-color: beige;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    height: 30px;
+
+    margin-bottom: 100px;
+  }
 `;
 
 const StyledUnenteredText = styled.span`

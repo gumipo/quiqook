@@ -41,7 +41,7 @@ const CookNameInput: React.FC<PropsType> = ({
   }, []);
 
   return (
-    <>
+    <StyledWrap>
       <StyledStepOneWap>
         <div>
           <ImageArea image={image} setImage={setImage} />
@@ -76,10 +76,16 @@ const CookNameInput: React.FC<PropsType> = ({
           確認画面へ
         </StyledConfirmStepButton>
       )}
-    </>
+    </StyledWrap>
   );
 };
 export default CookNameInput;
+
+const StyledWrap = styled.div`
+  @media screen and (max-width: 767px) {
+    margin-bottom: 100px;
+  }
+`;
 
 const StyledNameInput = styled.input`
   width: 100%;
@@ -144,8 +150,11 @@ const StyledNextButton = styled.button`
   height: 50px;
   background-color: beige;
   outline: none;
-  margin: 24px auto 60px auto;
-  z-index: -1;
+  margin: 10px auto;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    height: 30px;
+  }
 `;
 
 const StyledConfirmStepButton = styled.button`
@@ -154,5 +163,9 @@ const StyledConfirmStepButton = styled.button`
   height: 50px;
   background-color: beige;
   outline: none;
-  margin: 24px auto 100px auto;
+  margin: 10px auto;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    height: 30px;
+  }
 `;
