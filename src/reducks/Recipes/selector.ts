@@ -1,21 +1,9 @@
 import { createSelector } from "reselect";
 import { DefaultRootState } from "react-redux";
 
-const userSelector = (state: DefaultRootState) => state.users;
+const RecipeSelector = (state: DefaultRootState) => state.recipes;
 
-export const getIsSignedIn = createSelector(
-  [userSelector],
-  (state) => state.isSignedIn
-);
-
-export const getUserId = createSelector([userSelector], (state) => state.uid);
-
-export const getUserName = createSelector(
-  [userSelector],
-  (state) => state.username
-);
-
-export const getUserIcon = createSelector(
-  [userSelector],
-  (state) => state.icon
+export const getRecipesList = createSelector(
+  [RecipeSelector],
+  (state) => state.list
 );

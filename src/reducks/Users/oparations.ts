@@ -1,3 +1,4 @@
+import { RecipeType } from "./../Recipes/types";
 import { signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
 import {
@@ -9,6 +10,19 @@ import {
 } from "../../Firebase/index";
 import { Dispatch } from "redux";
 import { StoreState } from "./../Store/types";
+
+export const addFavoriteRecipe = (recipe: RecipeType) => {
+  return async (dispatch: Dispatch, getState: () => StoreState) => {
+    const uid = getState().users.uid;
+    const favoriteRef = db
+      .collection("users")
+      .doc(uid)
+      .collection("favorite")
+      .doc(recipe.id);
+    recipe.id = favoriteRef.id;
+    await favoriteRef.set(recipe);
+  };
+};
 
 export const listenAuthState = () => {
   return async (dispatch: Dispatch, getState: () => StoreState) => {
@@ -69,10 +83,10 @@ export const signUp = (username: string, email: string, password: string) => {
               dispatch(push("/my/recipe"));
             });
         }
-      })
-      .catch(() => {
-        alert("アカウント作成に失敗しました。通信状況を御確かめください");
       });
+    // .catch(() => {
+    //   alert("アカウント作成に失敗しました。通信状況を御確かめください");
+    // });
   };
 };
 

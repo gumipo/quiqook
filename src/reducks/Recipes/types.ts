@@ -29,4 +29,5 @@ export interface RecipeType {
   materials: MaterialType[];
   flavors: FlavorType[];
   methods: MethodListType[];
+  icon?: string;
 }

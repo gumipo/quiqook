@@ -1,41 +1,39 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import MyRecipeList from "../Componets/UserRecipes/MyRecipeList";
+import { MyRecipeList, FavoriteRecipeList } from "../Componets";
+
 import { db } from "../Firebase";
 
 const UserRecipe: React.FC = () => {
-  const [recipeList, setRecipeList] = useState("myRecipe");
-
-  useEffect(() => {
-    if (recipeList === "myRecipe") {
-      const query = db.collection
-    }
-  }, [recipeList]);
+  const [recipePage, setRecipePage] = useState("myRecipe");
 
   return (
     <StyledUserRecipe>
       <StyledRecipeChoice>
         <span
-          className={recipeList === "myRecipe" ? "page-border" : ""}
-          onClick={() => setRecipeList("myRecipe")}
+          className={recipePage === "myRecipe" ? "page-border" : ""}
+          onClick={() => setRecipePage("myRecipe")}
         >
           作成したレシピ
         </span>
         <span
-          className={recipeList === "draft" ? "page-border" : ""}
-          onClick={() => setRecipeList("draft")}
+          className={recipePage === "draft" ? "page-border" : ""}
+          onClick={() => setRecipePage("draft")}
         >
           下書き
         </span>
         <span
-          className={recipeList === "favorite" ? "page-border" : ""}
-          onClick={() => setRecipeList("favorite")}
+          className={recipePage === "favorite" ? "page-border" : ""}
+          onClick={() => setRecipePage("favorite")}
         >
           お気に入り
         </span>
       </StyledRecipeChoice>
       <StyledRecipeListArea>
-        <MyRecipeList />
+        {recipePage === "myRecipe" && <MyRecipeList recipePage={recipePage} />}
+        {recipePage === "favorite" && (
+          <FavoriteRecipeList recipePage={recipePage} />
+        )}
       </StyledRecipeListArea>
     </StyledUserRecipe>
   );
@@ -44,8 +42,11 @@ const UserRecipe: React.FC = () => {
 export default UserRecipe;
 
 const StyledUserRecipe = styled.section`
-  width: 800px;
+  width: 1200px;
   margin: 24px auto;
+  @media screen and (max-width: 767px) {
+    width: 350px;
+  }
 `;
 
 const StyledRecipeChoice = styled.div`
@@ -54,6 +55,9 @@ const StyledRecipeChoice = styled.div`
   　　span {
     margin: 0 24px;
     cursor: pointer;
+    @media screen and (max-width: 767px) {
+      font-size: 10px;
+    }
   }
 `;
 

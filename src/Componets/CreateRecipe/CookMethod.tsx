@@ -72,8 +72,9 @@ const CookMethod: React.FC<PropsType> = ({
   const nextStep = () => {
     const validConfirm = methods.filter((item) => item.method.length === 0);
     if (validConfirm.length > 0) {
-      const res = true;
-
+      const res = window.confirm(
+        "未入力のものは削除されますがよろしいですか？"
+      );
       if (res) {
         const validMethods = methods.filter((item) => item.method.length !== 0);
         if (validMethods.length === 0) {

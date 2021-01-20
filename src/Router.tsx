@@ -10,6 +10,7 @@ import {
   ResetPassword,
   UserRecipe,
   AllRecipes,
+  RecipeDetail,
 } from "./Pages";
 
 const Router: React.FC = () => {
@@ -21,6 +22,7 @@ const Router: React.FC = () => {
       <Route exact path="/reset/password" component={ResetPassword} />
       <Route exact path="/site/description" component={SiteDescription} />
       <Route exact path="/all/recipe" component={AllRecipes} />
+      <Route exact path={"/recipe/detail/:id?"} component={RecipeDetail} />
       <Auth>
         <Route exact path="/my/recipe" component={UserRecipe} />
         <Route exact path="/create/recipe/:id?" component={CreateRecipe} />

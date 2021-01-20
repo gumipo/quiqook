@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import {
   CookItemInput,
@@ -13,8 +13,15 @@ import {
   FlavorType,
   MethodListType,
 } from "../Componets/CreateRecipe/type";
+import { db } from "../Firebase";
+import { RecipeDataType } from "../reducks/Recipes/types";
 
 const CreateRecipe: React.FC = () => {
+  let id = window.location.pathname.split("/create/recipe")[1];
+  if (id !== "") {
+    id = id.split("/")[1];
+  }
+
   const [step, setStep] = useState(1);
   // step1
   const [name, setName] = useState("");
@@ -67,6 +74,24 @@ const CreateRecipe: React.FC = () => {
       setMethods(newMethods);
     }
   };
+
+  useEffect(() => {
+    if (id !== "") {
+      db.collection("recipes")
+        .doc(id)
+        .get()
+        .then((snapshot) => {
+          const data = snapshot.data() as RecipeDataType;
+          setName(data.name);
+          setImage(data.image);
+          setDescription(data.description);
+          setMaterials(data.materials);
+          setFlavors(data.flavors);
+          setMethods(data.methods);
+        });
+      setStep(4);
+    }
+  }, [id]);
 
   return (
     <StyledCreateRecipes>

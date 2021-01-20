@@ -88,7 +88,7 @@ const StyledMenuList = styled.ul`
     padding: 0 16px;
     @media screen and (max-width: 767px) {
       flex-direction: column;
-      padding: 5px 10px;
+      padding: 5px 2px;
     }
     span {
       margin-left: 8px;
@@ -96,6 +96,7 @@ const StyledMenuList = styled.ul`
       @media screen and (max-width: 767px) {
         margin: 0;
         font-size: 10px;
+        width: 100%;
       }
     }
     :nth-child(5) {
@@ -105,7 +106,7 @@ const StyledMenuList = styled.ul`
       background-color: #333;
       color: white;
       @media screen and (max-width: 767px) {
-        background-color: green;
+        background-color: #005500;
       }
     }
   }

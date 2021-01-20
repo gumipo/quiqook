@@ -1,3 +1,4 @@
+import { RecipeDataType } from "./../Recipes/types";
 import "react-redux";
 import { RouterState } from "connected-react-router";
 
@@ -7,6 +8,9 @@ export type StoreState = {
     uid: string;
     username: string;
     icon: string;
+  };
+  recipes: {
+    list: RecipeDataType[];
   };
   router: RouterState;
 };

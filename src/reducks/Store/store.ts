@@ -10,6 +10,7 @@ import * as History from "history";
 import { connectRouter, routerMiddleware } from "connected-react-router";
 
 import { UsersReducer } from "../Users/reducers";
+import { RecipesReducer } from "./../Recipes/reducers";
 
 const composeEnhancers =
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -19,6 +20,7 @@ export default function createStore(history: History.History) {
     combineReducers({
       router: connectRouter(history),
       users: UsersReducer,
+      recipes: RecipesReducer,
     }),
     applyMiddleware(routerMiddleware(history), thunk)
   );

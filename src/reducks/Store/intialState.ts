@@ -5,6 +5,9 @@ const initialState = {
     username: "",
     icon: "",
   },
+  recipes: {
+    list: [],
+  },
 };
 
 export default initialState;
