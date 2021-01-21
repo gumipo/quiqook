@@ -59,6 +59,9 @@ const StyledSiteDescription = styled.section`
   width: 100%;
   margin: 0 auto;
   text-align: center;
+  @media screen and (max-width: 767px) {
+    width: 375px;
+  }
 `;
 
 const SectionTitle = styled.div`
@@ -67,6 +70,11 @@ const SectionTitle = styled.div`
     opacity: 1;
     width: 100%;
     height: 600px;
+    @media screen and (max-width: 767px) {
+      width: 375px;
+      height: 200px;
+      margin-top: 8px;
+    }
   }
   h1 {
     width: 700px;
@@ -80,10 +88,18 @@ const SectionTitle = styled.div`
     margin: 10px 0 0 0;
     backdrop-filter: sepia(70%) contrast(230%) blur(5px);
     -webkit-backdrop-filter: sepia(70%) contrast(230%) blur(5px);
+    @media screen and (max-width: 767px) {
+      width: 250px;
+      font-size: 22px;
+    }
     ::after {
       content: "〜忙しい人の為のレシピサイト〜";
       font-size: 16px;
       padding-left: 12px;
+      @media screen and (max-width: 767px) {
+        font-size: 8px;
+        padding-left: 5px;
+      }
     }
   }
 `;

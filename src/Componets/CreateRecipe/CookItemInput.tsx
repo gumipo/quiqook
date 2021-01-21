@@ -126,7 +126,7 @@ const CookItemInput: React.FC<PropsType> = ({
   }, []);
 
   return (
-    <>
+    <StyledWrap>
       <StyledInputItem>
         <StyledItemListArea>
           <StyledItemTitle>材料</StyledItemTitle>
@@ -198,26 +198,45 @@ const CookItemInput: React.FC<PropsType> = ({
           確認画面へ
         </StyledConfirmStepButton>
       )}
-    </>
+    </StyledWrap>
   );
 };
 
 export default CookItemInput;
+
+const StyledWrap = styled.div`
+  @media screen and (max-width: 767px) {
+    margin-bottom: 100px;
+    width: 350px;
+  }
+`;
 
 const StyledInputItem = styled.div`
   width: 1100px;
   margin: 16px auto;
   display: flex;
   justify-content: space-around;
+  @media screen and (max-width: 767px) {
+    width: 350px;
+    flex-direction: column;
+  }
 `;
 
 const StyledItemListArea = styled.div`
   width: 500px;
+  margin-left: 5px;
+  @media screen and (max-width: 767px) {
+    width: 350px;
+  }
 `;
 
 const StyledItemTitle = styled.h3`
   font-size: 24px;
   margin: 0;
+  @media screen and (max-width: 767px) {
+    font-size: 16px;
+    margin: 16px 0 0 0;
+  }
 `;
 
 const StyledNameInput = styled.input`
@@ -225,12 +244,22 @@ const StyledNameInput = styled.input`
   height: 40px;
   margin-bottom: 16px;
   margin-right: 8px;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    height: 30px;
+    margin-bottom: 8px;
+  }
 `;
 
 const StyledAmountInput = styled.input`
   width: 100px;
   height: 40px;
   margin-right: 8px;
+  @media screen and (max-width: 767px) {
+    width: 100px;
+    height: 30px;
+    margin-bottom: 8px;
+  }
 `;
 
 const StyledItemAddButton = styled.button`
@@ -238,6 +267,10 @@ const StyledItemAddButton = styled.button`
   height: 40px;
   background-color: #e0f3bc;
   color: #333;
+  @media screen and (max-width: 767px) {
+    width: 100px;
+    height: 30px;
+  }
 `;
 
 const StyledNextStepButton = styled.button`
@@ -246,6 +279,10 @@ const StyledNextStepButton = styled.button`
   height: 50px;
   background-color: beige;
   margin: 10px auto;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    height: 30px;
+  }
 `;
 
 const StyledErrText = styled.p`
@@ -254,6 +291,9 @@ const StyledErrText = styled.p`
   color: red;
   text-align: center;
   font-size: 14px;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+  }
 `;
 
 const StyledConfirmStepButton = styled.button`
@@ -262,5 +302,9 @@ const StyledConfirmStepButton = styled.button`
   height: 50px;
   background-color: beige;
   outline: none;
-  margin: 24px auto;
+  margin: 10px auto;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    height: 30px;
+  }
 `;

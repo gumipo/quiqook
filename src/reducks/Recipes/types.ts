@@ -19,6 +19,7 @@ export interface RecipeDataType {
   methods: MethodListType[];
   updated_at: firebase.firestore.Timestamp;
   created_at?: firebase.firestore.Timestamp;
+  favoriteCount: number;
 }
 
 export interface RecipeType {
@@ -29,4 +30,6 @@ export interface RecipeType {
   materials: MaterialType[];
   flavors: FlavorType[];
   methods: MethodListType[];
+  icon?: string;
+  favoriteCount: number;
 }

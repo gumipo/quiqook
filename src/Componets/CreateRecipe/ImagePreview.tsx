@@ -16,8 +16,11 @@ const ImagePreview: React.FC<PropsType> = ({ id, deleteImage, path }) => {
       {path.length > 0 && (
         <StyledImageWrapin>
           <StyledImagePreview alt="プレビュー画像" src={path} />
-          <StyledDeleteIcon onClick={() => deleteImage(id)}>
-            <HighlightOffIcon color="error" />
+          <StyledDeleteIcon
+            onClick={() => deleteImage(id)}
+            style={{ zIndex: 2 }}
+          >
+            <HighlightOffIcon color="error" style={{ zIndex: 3 }} />
           </StyledDeleteIcon>
         </StyledImageWrapin>
       )}
@@ -31,6 +34,11 @@ const StyledImageWrapin = styled.div`
   width: 400px;
   height: 400px;
   border-style: groove;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+  }
 `;
 
 const StyledImagePreview = styled.img`
@@ -47,4 +55,7 @@ const StyledDeleteIcon = styled(IconButton)`
   position: absolute;
   top: -100%;
   right: -90%;
+  @media screen and (max-width: 767px) {
+    right: -85%;
+  }
 `;

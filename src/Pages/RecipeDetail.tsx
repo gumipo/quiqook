@@ -1,41 +1,44 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { ImageType, MaterialType, FlavorType, MethodListType } from "./type";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { db } from "../Firebase";
 import styled from "styled-components";
-import NoImage from "../../assets/Images/NoImage.png";
+import {
+  MaterialType,
+  FlavorType,
+  MethodListType,
+} from "../Componets/CreateRecipe/type";
 import { Divider } from "@material-ui/core";
-import { saveRecipe } from "../../reducks/Recipes/oparations";
+import NoImage from "../assets/Images/NoImage.png";
 
-interface PropsType {
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-  name: string;
-  description: string;
-  image: ImageType;
-  materials: MaterialType[];
-  flavors: FlavorType[];
-  methods: MethodListType[];
-  favoriteCount: number;
-}
+const RecipeDetail: React.FC = () => {
+  const selector = useSelector((state) => state);
+  const path = selector.router.location.pathname;
+  const id = path.split("/recipe/detail/")[1];
 
-const ConfirmationRecipe: React.FC<PropsType> = ({
-  setStep,
-  name,
-  description,
-  image,
-  materials,
-  flavors,
-  methods,
-  favoriteCount,
-}) => {
-  const dispatch = useDispatch();
+  const [image, setImage] = useState({ id: "", path: "" });
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [flavors, setFlavors] = useState<FlavorType[]>([]);
+  const [materials, setMaterials] = useState<MaterialType[]>([]);
+  const [methods, setMethods] = useState<MethodListType[]>([]);
 
-  let id = window.location.pathname.split("/create/recipe")[1];
-  if (id !== "") {
-    id = id.split("/")[1];
-  }
+  useEffect(() => {
+    db.collection("recipes")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        const data = doc.data();
+        setName(data!.name);
+        setDescription(data!.description);
+        setFlavors(data!.flavors);
+        setMaterials(data!.materials);
+        setImage(data!.image);
+        setMethods(data!.methods);
+      });
+  }, []);
 
   return (
-    <StyledConfirmationRecipe>
+    <StyledRecipeDetail>
       <StyledRecipeFirstStep>
         <div>
           <StyledRecipeTitle>{name}のレシピ</StyledRecipeTitle>
@@ -51,7 +54,7 @@ const ConfirmationRecipe: React.FC<PropsType> = ({
           </div>
         </StyledRecipeDescription>
       </StyledRecipeFirstStep>
-      <StyledFixButton onClick={() => setStep(1)}>編集する</StyledFixButton>
+
       <StyledSecondStepTitle>用意するもの</StyledSecondStepTitle>
       <StyledRecipeSecondStep>
         <StyledMaterilasWrap>
@@ -74,7 +77,7 @@ const ConfirmationRecipe: React.FC<PropsType> = ({
           ))}
         </StyledFlavorsWrap>
       </StyledRecipeSecondStep>
-      <StyledFixButton onClick={() => setStep(2)}>編集する</StyledFixButton>
+
       <StyledThirdStepTitle>料理工程</StyledThirdStepTitle>
       <StyledRecipeThirdStep>
         {methods.map((method, index) => (
@@ -96,32 +99,13 @@ const ConfirmationRecipe: React.FC<PropsType> = ({
           </StyledMethodsArea>
         ))}
       </StyledRecipeThirdStep>
-      <StyledFixButton onClick={() => setStep(3)}>編集する</StyledFixButton>
-      <StyledRegisterButton
-        onClick={() =>
-          dispatch(
-            saveRecipe({
-              id,
-              image,
-              name,
-              description,
-              materials,
-              flavors,
-              methods,
-              favoriteCount,
-            })
-          )
-        }
-      >
-        登録する
-      </StyledRegisterButton>
-    </StyledConfirmationRecipe>
+    </StyledRecipeDetail>
   );
 };
 
-export default ConfirmationRecipe;
+export default RecipeDetail;
 
-const StyledConfirmationRecipe = styled.div`
+const StyledRecipeDetail = styled.div`
   width: 900px;
   margin: 16px auto;
   border-style: groove;
@@ -131,18 +115,7 @@ const StyledConfirmationRecipe = styled.div`
   box-shadow: 0px 0px 10px 5px #333;
   @media screen and (max-width: 767px) {
     width: 350px;
-  }
-`;
-
-const StyledFixButton = styled.button`
-  display: block;
-  width: 200px;
-  height: 30px;
-  background: beige;
-  margin: 16px auto;
-  cursor: pointer;
-  @media screen and (max-width: 767px) {
-    width: 100px;
+    margin-bottom: 100px;
   }
 `;
 
@@ -299,6 +272,7 @@ const StyledRecipeThirdStep = styled.div`
   @media screen and (max-width: 767px) {
     width: 320px;
     margin-left: 16px;
+    margin-bottom: 24px;
   }
 `;
 
@@ -328,18 +302,20 @@ const StyledMethodDescription = styled.ul`
   justify-content: space-between;
   margin-block-start: 8px;
   margin-block-end: 8px;
-`;
 
-const StyledRegisterButton = styled.button`
-  display: block;
-  width: 300px;
-  height: 50px;
-  margin: 24px auto;
-  background-color: #aae2aa;
-  color: #333;
-  @media screen and (max-width: 767px) {
+  li {
     width: 200px;
-    height: 30px;
-    margin-bottom: 80px;
+    font-size: 14px;
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+    }
+  }
+  span {
+    padding: 0;
+    font-size: 12px;
+    margin-left: 12px;
+    @media screen and (max-width: 767px) {
+      font-size: 8px;
+    }
   }
 `;

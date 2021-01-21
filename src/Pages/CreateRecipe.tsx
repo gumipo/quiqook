@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import {
   CookItemInput,
@@ -13,8 +13,15 @@ import {
   FlavorType,
   MethodListType,
 } from "../Componets/CreateRecipe/type";
+import { db } from "../Firebase";
+import { RecipeDataType } from "../reducks/Recipes/types";
 
 const CreateRecipe: React.FC = () => {
+  let id = window.location.pathname.split("/create/recipe")[1];
+  if (id !== "") {
+    id = id.split("/")[1];
+  }
+
   const [step, setStep] = useState(1);
   // step1
   const [name, setName] = useState("");
@@ -35,17 +42,19 @@ const CreateRecipe: React.FC = () => {
     initialMethodState,
   ]);
 
+  const [favoriteCount, setFavoriteCount] = useState(0);
+
   const titleText = useMemo(() => {
     switch (step) {
       case 1:
-        return "〜料理名、キャッチコピーの作成〜";
+        return "料理名、キャッチコピーの作成";
       case 2:
-        return "〜材料と調味料リスト作成〜";
+        return "材料と調味料リスト作成";
       case 3: {
-        return "〜料理工程の作成〜";
+        return "料理工程の作成";
       }
       case 4: {
-        return "〜確認画面〜";
+        return "確認画面";
       }
       default:
         break;
@@ -67,6 +76,25 @@ const CreateRecipe: React.FC = () => {
       setMethods(newMethods);
     }
   };
+
+  useEffect(() => {
+    if (id !== "") {
+      db.collection("recipes")
+        .doc(id)
+        .get()
+        .then((snapshot) => {
+          const data = snapshot.data() as RecipeDataType;
+          setName(data.name);
+          setImage(data.image);
+          setDescription(data.description);
+          setMaterials(data.materials);
+          setFlavors(data.flavors);
+          setMethods(data.methods);
+          setFavoriteCount(data.favoriteCount);
+        });
+      setStep(4);
+    }
+  }, [id]);
 
   return (
     <StyledCreateRecipes>
@@ -122,6 +150,7 @@ const CreateRecipe: React.FC = () => {
           flavors={flavors}
           methods={methods}
           setStep={setStep}
+          favoriteCount={favoriteCount}
         />
       )}
     </StyledCreateRecipes>
@@ -133,14 +162,26 @@ export default CreateRecipe;
 const StyledCreateRecipes = styled.section`
   width: 100%;
   margin: 24px auto;
+  @media screen and (max-width: 767px) {
+    width: 360px;
+  }
 `;
 
 const StyledStep = styled.h2`
   width: 1000px;
   margin: 0 auto;
+  @media screen and (max-width: 767px) {
+    width: 300px;
+    font-size: 14px;
+    margin-left: 16px;
+  }
   span {
     font-size: 22px;
     margin-left: 16px;
+    @media screen and (max-width: 767px) {
+      width: 300px;
+      font-size: 16px;
+    }
   }
 `;
 
@@ -151,4 +192,7 @@ const StyledPrevStep = styled.p`
   color: #333;
   opacity: 0.5;
   margin: 0 auto;
+  @media screen and (max-width: 767px) {
+    width: 350px;
+  }
 `;

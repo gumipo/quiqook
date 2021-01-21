@@ -6,3 +6,4 @@ export { default as SignUP } from "./SignUp";
 export { default as ResetPassword } from "./ResetPassword";
 export { default as UserRecipe } from "./UserRecipe";
 export { default as AllRecipes } from "./AllRecipes";
+export { default as RecipeDetail } from "./RecipeDetail";

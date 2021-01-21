@@ -34,7 +34,9 @@ const Header: React.FC = () => {
         <StyledHeaderNav>
           <UserIcon src={icon ? icon : chef} alt="usericon" />
           <UserName>{username}chef</UserName>
-          <li onClick={() => dispatch(signOut())}>ログアウト</li>
+          <StyledLogOutButton onClick={() => dispatch(signOut())}>
+            ログアウト
+          </StyledLogOutButton>
         </StyledHeaderNav>
       ) : (
         <StyledHeaderNav>
@@ -56,6 +58,10 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 767px) {
+    height: 60px;
+    box-shadow: 0px 3px 6px black;
+  }
 `;
 
 const StyledHeaderTitle = styled.h1`
@@ -66,12 +72,21 @@ const StyledHeaderTitle = styled.h1`
   font-size: 45px;
   color: #333;
   cursor: pointer;
+  @media screen and (max-width: 767px) {
+    width: 100px;
+    margin-left: 32px;
+    font-size: 32px;
+  }
 `;
 
 const UserIcon = styled.img`
   width: 42px;
   height: 42px;
   border-radius: 21px;
+  @media screen and (max-width: 767px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const UserName = styled.p`
@@ -85,6 +100,10 @@ const StyledHeaderNav = styled.ul`
   align-items: center;
   justify-content: center;
   margin-left: 16px;
+  @media screen and (max-width: 767px) {
+    width: 200px;
+    font-size: 12px;
+  }
   li {
     list-style: none;
     text-decoration: none;
@@ -93,5 +112,12 @@ const StyledHeaderNav = styled.ul`
     :hover {
       color: aqua;
     }
+  }
+`;
+
+const StyledLogOutButton = styled.li`
+  @media screen and (max-width: 767px) {
+    width: 90px;
+    font-size: 10px;
   }
 `;

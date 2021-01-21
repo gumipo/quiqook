@@ -6,10 +6,14 @@ service cloud.firestore {
       allow create ;
       allow update: if request.auth.uid == userId ;
       allow delete: if request.auth.uid == userId ;
+
+       match /favorite/{favoriteId} {
+        allow read,write: if request.auth.uid == userId;
+      }
      }
 
       match /recipes/{recipeId} {
-      allow read: if request.auth.uid != null;
+        allow read : if true;
       allow write: if request.auth.uid != null;
      }
    }

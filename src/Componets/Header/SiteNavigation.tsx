@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import EventNoteIcon from "@material-ui/icons/EventNote";
@@ -9,6 +9,7 @@ import HomeIcon from "@material-ui/icons/Home";
 
 const SiteNavigation: React.FC = () => {
   const history = useHistory();
+  const [page, setPage] = useState("/");
 
   const navMenus = [
     {
@@ -47,8 +48,15 @@ const SiteNavigation: React.FC = () => {
     <StyledNavigation>
       <StyledMenuList>
         {navMenus.map((menu) => (
-          <li key={menu.id} onClick={() => history.push(menu.value)}>
-            <menu.icon />
+          <li
+            className={page === menu.value ? "page-border-top" : ""}
+            key={menu.id}
+            onClick={() => {
+              history.push(menu.value);
+              setPage(menu.value);
+            }}
+          >
+            <menu.icon className="menu__icon" />
             <span>{menu.label}</span>
           </li>
         ))}
@@ -65,6 +73,14 @@ const StyledNavigation = styled.nav`
   background-color: #005500;
   box-shadow: 0px 0px 5px 0px #333;
   line-height: 50px;
+
+  @media screen and (max-width: 767px) {
+    height: 50px;
+    position: fixed;
+    bottom: 0;
+    line-height: 20px;
+    z-index: 4;
+  }
 `;
 
 const StyledMenuList = styled.ul`
@@ -73,19 +89,33 @@ const StyledMenuList = styled.ul`
   justify-content: space-around;
   margin: 0;
   color: white;
+  font-size: 10px;
+  width: 100%;
   li {
     display: flex;
     align-items: center;
     padding: 0 16px;
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+      padding: 5px 2px;
+    }
     span {
       margin-left: 8px;
+      font-size: 16px;
+      @media screen and (max-width: 767px) {
+        margin: 0;
+        font-size: 10px;
+        width: 100%;
+      }
     }
     :nth-child(5) {
       font-family: "Amatic SC", cursive;
     }
     :hover {
-      background-color: #333;
-      color: white;
+      @media screen and (min-width: 1000px) {
+        background-color: #333;
+        color: white;
+      }
     }
   }
 `;
