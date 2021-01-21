@@ -272,6 +272,7 @@ const StyledRecipeThirdStep = styled.div`
   @media screen and (max-width: 767px) {
     width: 320px;
     margin-left: 16px;
+    margin-bottom: 24px;
   }
 `;
 
@@ -301,4 +302,20 @@ const StyledMethodDescription = styled.ul`
   justify-content: space-between;
   margin-block-start: 8px;
   margin-block-end: 8px;
+
+  li {
+    width: 200px;
+    font-size: 14px;
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+    }
+  }
+  span {
+    padding: 0;
+    font-size: 12px;
+    margin-left: 12px;
+    @media screen and (max-width: 767px) {
+      font-size: 8px;
+    }
+  }
 `;

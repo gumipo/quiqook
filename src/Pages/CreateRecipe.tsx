@@ -42,6 +42,8 @@ const CreateRecipe: React.FC = () => {
     initialMethodState,
   ]);
 
+  const [favoriteCount, setFavoriteCount] = useState(0);
+
   const titleText = useMemo(() => {
     switch (step) {
       case 1:
@@ -88,6 +90,7 @@ const CreateRecipe: React.FC = () => {
           setMaterials(data.materials);
           setFlavors(data.flavors);
           setMethods(data.methods);
+          setFavoriteCount(data.favoriteCount);
         });
       setStep(4);
     }
@@ -147,6 +150,7 @@ const CreateRecipe: React.FC = () => {
           flavors={flavors}
           methods={methods}
           setStep={setStep}
+          favoriteCount={favoriteCount}
         />
       )}
     </StyledCreateRecipes>

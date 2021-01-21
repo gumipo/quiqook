@@ -14,6 +14,7 @@ interface PropsType {
   materials: MaterialType[];
   flavors: FlavorType[];
   methods: MethodListType[];
+  favoriteCount: number;
 }
 
 const ConfirmationRecipe: React.FC<PropsType> = ({
@@ -24,6 +25,7 @@ const ConfirmationRecipe: React.FC<PropsType> = ({
   materials,
   flavors,
   methods,
+  favoriteCount,
 }) => {
   const dispatch = useDispatch();
 
@@ -106,6 +108,7 @@ const ConfirmationRecipe: React.FC<PropsType> = ({
               materials,
               flavors,
               methods,
+              favoriteCount,
             })
           )
         }

@@ -32,6 +32,7 @@ export const saveRecipe = ({
   materials,
   flavors,
   methods,
+  favoriteCount,
 }: RecipeType) => {
   return async (dispatch: Dispatch, getState: () => StoreState) => {
     const timestamp = FirebaseTimeStamp.now();
@@ -51,12 +52,14 @@ export const saveRecipe = ({
       flavors: flavors,
       methods: methods,
       updated_at: timestamp,
+      favoriteCount: favoriteCount,
     };
     if (id === "") {
       const ref = recipesRef.doc();
       id = ref.id;
       data.id = id;
       data.created_at = timestamp;
+      data.favoriteCount = 0;
     }
 
     return recipesRef

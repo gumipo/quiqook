@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import EventNoteIcon from "@material-ui/icons/EventNote";
@@ -9,6 +9,7 @@ import HomeIcon from "@material-ui/icons/Home";
 
 const SiteNavigation: React.FC = () => {
   const history = useHistory();
+  const [page, setPage] = useState("/");
 
   const navMenus = [
     {
@@ -47,7 +48,14 @@ const SiteNavigation: React.FC = () => {
     <StyledNavigation>
       <StyledMenuList>
         {navMenus.map((menu) => (
-          <li key={menu.id} onClick={() => history.push(menu.value)}>
+          <li
+            className={page === menu.value ? "page-border-top" : ""}
+            key={menu.id}
+            onClick={() => {
+              history.push(menu.value);
+              setPage(menu.value);
+            }}
+          >
             <menu.icon className="menu__icon" />
             <span>{menu.label}</span>
           </li>
@@ -65,12 +73,13 @@ const StyledNavigation = styled.nav`
   background-color: #005500;
   box-shadow: 0px 0px 5px 0px #333;
   line-height: 50px;
+
   @media screen and (max-width: 767px) {
     height: 50px;
     position: fixed;
     bottom: 0;
     line-height: 20px;
-    z-index: 2;
+    z-index: 4;
   }
 `;
 
@@ -103,10 +112,9 @@ const StyledMenuList = styled.ul`
       font-family: "Amatic SC", cursive;
     }
     :hover {
-      background-color: #333;
-      color: white;
-      @media screen and (max-width: 767px) {
-        background-color: #005500;
+      @media screen and (min-width: 1000px) {
+        background-color: #333;
+        color: white;
       }
     }
   }

@@ -73,7 +73,7 @@ const CookMethod: React.FC<PropsType> = ({
     const validConfirm = methods.filter((item) => item.method.length === 0);
     if (validConfirm.length > 0) {
       const res = window.confirm(
-        "未入力のものは削除されますがよろしいですか？"
+        "内容が未入力のものは削除されますがよろしいですか？"
       );
       if (res) {
         const validMethods = methods.filter((item) => item.method.length !== 0);
@@ -263,7 +263,6 @@ const NextStepButton = styled.button`
   @media screen and (max-width: 767px) {
     width: 200px;
     height: 30px;
-
     margin-bottom: 100px;
   }
 `;

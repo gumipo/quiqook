@@ -10,6 +10,7 @@ import { getUserId } from "../../reducks/Users/selector";
 import { db } from "../../Firebase";
 import { addFavoriteRecipe } from "../../reducks/Users/oparations";
 import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
+import chef from "../../assets/Images/chef.png";
 
 interface PropsType {
   recipe: RecipeDataType;
@@ -37,6 +38,17 @@ const RecipeListItem: React.FC<PropsType> = ({ recipe }) => {
     return `${time}分`;
   }, []);
 
+  const favoriteCount = useMemo(() => {
+    if (isFavorite === true) {
+      return recipe.favoriteCount + 1;
+    } else {
+      if (recipe.favoriteCount === 0) {
+        return recipe.favoriteCount;
+      }
+      return recipe.favoriteCount - 1;
+    }
+  }, [isFavorite]);
+
   useEffect(() => {
     if (uid === "") {
       return;
@@ -54,7 +66,7 @@ const RecipeListItem: React.FC<PropsType> = ({ recipe }) => {
           }
         });
       });
-  }, []);
+  }, [uid]);
 
   const favoriteChange = () => {
     const batch = db.batch();
@@ -69,10 +81,11 @@ const RecipeListItem: React.FC<PropsType> = ({ recipe }) => {
           methods: recipe.methods,
           id: recipe.id!,
           icon: recipe.icon!,
+          favoriteCount: recipe.favoriteCount,
         })
       );
       batch.update(db.collection("recipes").doc(recipe.id), {
-        favoriteUser: uid,
+        favoriteCount: recipe.favoriteCount + 1,
       });
       setIsFavorite(true);
     } else {
@@ -81,7 +94,9 @@ const RecipeListItem: React.FC<PropsType> = ({ recipe }) => {
         .collection("favorite")
         .doc(recipe.id)
         .delete();
-      batch.delete(db.collection("recipes").doc(recipe.id));
+      batch.update(db.collection("recipes").doc(recipe.id), {
+        favoriteCount: recipe.favoriteCount + 1,
+      });
       setIsFavorite(false);
     }
   };
@@ -98,13 +113,16 @@ const RecipeListItem: React.FC<PropsType> = ({ recipe }) => {
     <StyledRecipeListItem>
       <RecipeImage
         src={recipe.image.path ? recipe.image.path : NoImage}
-        alt=""
+        alt="recipe image"
       />
       <div>
         <StyledUploadArea>
           <StyledUserArea>
             <StyledDate>{date}</StyledDate>
-            <StyledUserIcon src={recipe.icon} alt="user icon" />
+            <StyledUserIcon
+              src={recipe.icon ? recipe.icon : chef}
+              alt="user icon"
+            />
           </StyledUserArea>
         </StyledUploadArea>
         <div>
@@ -119,10 +137,14 @@ const RecipeListItem: React.FC<PropsType> = ({ recipe }) => {
                 top: "300px",
                 right: "5%",
                 background: "#ffe4d9",
+                zIndex: 2,
               }}
               onClick={() => favoriteChange()}
             >
-              <FavoriteIcon color={isFavorite ? "error" : "disabled"} />
+              <FavoriteIcon
+                color={isFavorite ? "error" : "disabled"}
+                style={{ zIndex: 3 }}
+              />
             </IconButton>
           )}
           <StyledItemFooter>
@@ -132,6 +154,7 @@ const RecipeListItem: React.FC<PropsType> = ({ recipe }) => {
                 <span>{totalTime}</span>
               </StyledTime>
             )}
+            {favoriteCount}
             <RecipeDetailButton
               onClick={() => history.push("/recipe/detail/" + recipe.id)}
             >

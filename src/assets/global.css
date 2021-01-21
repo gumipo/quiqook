@@ -16,6 +16,12 @@ button {
   border-bottom: 5px solid orange;
 }
 
+@media screen and (max-width: 767px) {
+  .page-border-top {
+    border-top: 2px solid rgb(235, 179, 133);
+  }
+}
+
 .menu__icon {
   width: 30px;
 }

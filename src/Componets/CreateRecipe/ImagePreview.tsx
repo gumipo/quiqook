@@ -16,8 +16,11 @@ const ImagePreview: React.FC<PropsType> = ({ id, deleteImage, path }) => {
       {path.length > 0 && (
         <StyledImageWrapin>
           <StyledImagePreview alt="プレビュー画像" src={path} />
-          <StyledDeleteIcon onClick={() => deleteImage(id)}>
-            <HighlightOffIcon color="error" />
+          <StyledDeleteIcon
+            onClick={() => deleteImage(id)}
+            style={{ zIndex: 2 }}
+          >
+            <HighlightOffIcon color="error" style={{ zIndex: 3 }} />
           </StyledDeleteIcon>
         </StyledImageWrapin>
       )}
